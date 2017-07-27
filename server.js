@@ -18,13 +18,13 @@ app.use(bodyParser.json());
 var org = nforce.createConnection({
   clientId: '3MVG9zlTNB8o8BA32zL1fZQgQUSvJf4PmET9ROyYedU9cyygJ_Gy0CUL.4tVzB27OmZ8vvDmNyTIs6LXx58CS',
   clientSecret: '1708988462682560803',
-  redirectUri: 'https://localhost:8080/oauth/_callback',
+  redirectUri: 'https://event-connect-test.herokuapp.com/oauth/_callback',
   environment: 'production', 
   mode: 'single'
 });
 
-https.createServer(sslOptions, app).listen(process.env.PORT || 8080);
-// app.listen(process.env.PORT || 8080);
+// https.createServer(sslOptions, app).listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8080);
 console.log("Server Running");
 
 var oauth;
@@ -50,5 +50,5 @@ app.get("/api/events", function(req, res) {
 
 // PathLocationStrategy
 app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname + '/src/index.html'));
+    res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
