@@ -14,4 +14,8 @@ export class EventListComponent implements OnInit {
     this._ds.getEventList();
   }
 
+  test() {
+    this._ds.getEventList();
+  }
+
 }
