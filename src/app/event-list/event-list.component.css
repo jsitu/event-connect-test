@@ -13,7 +13,7 @@ md-card.event-card {
     display: flex;
     flex-direction: column;
     flex: 1;
-    max-width: 25%;
+    max-width: 30%;
     overflow: hidden;
     margin: .5em;
     padding: 15px;
@@ -24,6 +24,8 @@ md-card.event-card {
 md-card.event-card img {
     object-fit: contain;
     margin-bottom: .5em;
+    min-height: 230px;
+    max-height: 230px;
 }
 
 md-card.event-card p {
@@ -53,6 +55,10 @@ md-card.event-card p.event-address {
 
 md-card-actions {
     margin: 0;
+}
+
+md-card-actions span {
+    font-size: .75em;
 }
 
 md-card-actions div.tooltip-host {

@@ -1,6 +1,7 @@
 import { Component, OnInit, trigger, state, style, transition, animate, keyframes } from '@angular/core';
-import { DataService } from './../services/data.service';
 import { ActivatedRoute, Data } from '@angular/router';
+import { DataService } from './../services/data.service';
+import { LookupService } from './../services/lookup.service';
 
 @Component({
   selector: 'app-event-list',
@@ -14,7 +15,8 @@ export class EventListComponent implements OnInit {
 
   constructor(
     private _ds: DataService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    public lookupService: LookupService
   ) { }
 
   ngOnInit() {

@@ -6,11 +6,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule, MdTooltipModule } from '@angular/material';
 import { AppRouteModule } from './app.route';
 import 'hammerjs';
+
 import { AppComponent } from './app.component';
 import { EventListComponent } from './event-list/event-list.component';
 
 import { DataService } from './services/data.service';
+import { LookupService } from './services/lookup.service';
+
 import { EventsResolver } from './resolvers/events.resolver';
+
 import { DateTimePipe } from './pipes/date-time.pipe';
 
 @NgModule({
@@ -28,7 +32,7 @@ import { DateTimePipe } from './pipes/date-time.pipe';
     MaterialModule,
     MdTooltipModule
   ],
-  providers: [DataService, EventsResolver],
+  providers: [DataService, LookupService, EventsResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
