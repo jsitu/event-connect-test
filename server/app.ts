@@ -40,7 +40,7 @@ org.authenticate(config.sfCred, function(err, resp) {
 
 app.get('/api/events', function(req, res) {
 
-    const q = 'select Title__c, Start__c, End__c, Status__c from Event__c';
+    const q = 'select Title__c, Start__c, End__c, Status__c, Address__c, City__c, State__c, Zip__c from Event__c';
 
     org.query({query: q}, function (err, resp) {
         if (err) {

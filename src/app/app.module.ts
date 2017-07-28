@@ -3,28 +3,32 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from '@angular/material';
-import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule, MdTooltipModule } from '@angular/material';
+import { AppRouteModule } from './app.route';
 import 'hammerjs';
 import { AppComponent } from './app.component';
 import { EventListComponent } from './event-list/event-list.component';
 
 import { DataService } from './services/data.service';
+import { EventsResolver } from './resolvers/events.resolver';
+import { DateTimePipe } from './pipes/date-time.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EventListComponent
+    EventListComponent,
+    DateTimePipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule,
+    AppRouteModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    MdTooltipModule
   ],
-  providers: [DataService],
+  providers: [DataService, EventsResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

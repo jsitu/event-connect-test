@@ -9,14 +9,6 @@ export class DataService {
   constructor(private _http: Http) { }
 
   getEventList(): Promise<any> {
-    return this._http.get('/api/events').toPromise().then(
-      (result) => {
-        console.log(result.json());
-        return result.json();
-      }
-    )
-    .catch(
-      (error) => console.log(error)
-    );
+    return this._http.get('/api/events').toPromise();
   }
 }

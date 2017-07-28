@@ -1,3 +1,18 @@
-<button md-fab>
-  <md-icon>check circle</md-icon>
-</button>
+<section id="container">
+  <md-card class="event-card" *ngFor="let event of events">
+    <img md-card-image src="http://sun103.com/wp-content/uploads/2014/12/Upcoming-Events.jpg">
+    <md-card-content>
+      <!--
+        "[{"title__c":"Karaoke Night","start__c":"2017-07-28T03:30:00.000+0000","end__c":"2017-07-28T06:30:00.000+0000","status__c":"Draft"}]"
+      -->
+      <p class="event-start-time">{{event.start__c | DateTime: 'day' | uppercase}}</p>
+      <p class="event-title">{{event.title__c | uppercase}}</p>
+      <p class="event-address">{{event.address__c}}, {{event.city__c}}  {{event.state__c}}</p>
+    </md-card-content>
+    <md-card-actions>
+      <div class="tooltip-host" mdTooltip="Share" mdTooltipPosition="above">
+        <a><i class="material-icons">share</i></a>
+      </div>
+    </md-card-actions>
+  </md-card>
+</section>
