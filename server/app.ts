@@ -4,13 +4,15 @@ import * as path from 'path';
 import * as nforce from 'nforce';
 import * as config from './config';
 
+import { getEventsRouter } from './routes/events';
+
 /* These need to be during production deployment */
 import * as https from 'https';
 
 const app = express();
+
 app.use(json());
 app.use(urlencoded({ extended: true }));
-
 app.use(express.static(__dirname + '/../../dist/client'));
 
 let oauth;
@@ -38,22 +40,10 @@ org.authenticate(config.sfCred, function(err, resp) {
     }
 });
 
-app.get('/api/events', function(req, res) {
+// api routes
+app.use('/api/events', getEventsRouter(org));
 
-    // tslint:disable-next-line:max-line-length
-    const q = 'select Title__c, Start__c, End__c, Status__c, Address__c, City__c, State__c, Zip__c, Cover_Image_URL__c, Remaining_Seats__c from Event__c';
-
-    org.query({query: q}, function (err, resp) {
-        if (err) {
-            console.log('Error: ' + err.message);
-        };
-        if (!err && resp.records) {
-            res.send(resp.records);
-        };
-    });
-});
-
-// PathLocationStrategy
+// this path location strategy is to let Angular handle all the routing
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname + '/../client/index.html'));
 });
