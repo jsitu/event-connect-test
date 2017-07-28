@@ -1,6 +1,6 @@
-<section id="container">
-  <md-card class="event-card" *ngFor="let event of events">
-    <img md-card-image [src]="event.cover_image_url__c ? event.cover_image_url__c : lookupService.defaultEventCoverImageUrl">
+<section id="event-list-container">
+  <md-card class="event-card" *ngFor="let event of events" [@eventAnimTrigger]="allEventState" (click)="openEventDetails(event)">
+    <img [src]="event.cover_image_url__c ? event.cover_image_url__c : lookupService.defaultEventCoverImageUrl">
     <md-card-content>
       <p class="event-start-time">{{event.start__c | DateTime: 'day' | uppercase}}</p>
       <p class="event-title">{{event.title__c | uppercase}}</p>
@@ -11,6 +11,24 @@
       <div class="tooltip-host" mdTooltip="Share" mdTooltipPosition="above">
         <a><i class="material-icons">share</i></a>
       </div>
+    </md-card-actions>
+  </md-card>
+</section>
+<section id="event-detail-container" [@eventAnimTrigger]="selectedEventState">
+  <md-card class="event-detail-card">
+    <md-card-header>
+      <img [src]="selectedEvent?.cover_image_url__c ? selectedEvent.cover_image_url__c : lookupService.defaultEventCoverImageUrl">
+      <a (click)="closeEventDetails()"><i class="material-icons">clear</i></a>
+    </md-card-header>
+    <md-card-content>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+        bred for hunting.
+      </p>
+    </md-card-content>
+    <md-card-actions>
+
     </md-card-actions>
   </md-card>
 </section>

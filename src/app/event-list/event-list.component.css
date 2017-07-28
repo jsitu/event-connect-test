@@ -1,7 +1,7 @@
-section#container {
+section#event-list-container {
     display: flex;
     flex-wrap: wrap;
-    width: 100vw;
+    width: 100%;;
     height: auto;
 }
 
@@ -19,6 +19,8 @@ md-card.event-card {
     padding: 15px;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif !important;
+    cursor: pointer;
+    transition: all .3s linear;
 }
 
 md-card.event-card img {
