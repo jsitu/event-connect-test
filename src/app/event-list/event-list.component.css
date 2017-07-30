@@ -9,6 +9,11 @@ md-card-content {
     margin-bottom: 5px;
 }
 
+md-card-content div {
+    display: flex;
+    justify-content: center;
+}
+
 md-card.event-card {
     display: flex;
     flex-direction: column;
@@ -42,6 +47,30 @@ md-card.event-card p {
 md-card.event-card p.event-start-time {
     font-size: .9em;
     color: #6d7074;
+}
+
+md-card.event-card p.event-status {
+    align-self: flex-end;
+    text-decoration: underline;
+    font-weight: bold;
+    margin-top: 0;
+    text-align: right;
+}
+
+md-card.event-card p.event-status.isDraft {
+    color: #FBC02D;
+}
+
+md-card.event-card p.event-status.isOpen {
+    color: #4CAF50;
+}
+
+md-card.event-card p.event-status.isSoldOut {
+    color: #F44336;
+}
+
+md-card.event-card p.event-status.isClosed {
+    color: #9E9E9E;
 }
 
 md-card.event-card p.event-title {

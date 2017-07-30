@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { DataService } from './../services/data.service';
 import { LookupService } from './../services/lookup.service';
+import { EventService } from './event.service';
 import { eventEnterLeaveAnimationTrigger } from '../animations/eventAnimations';
 
 @Component({
@@ -14,14 +15,16 @@ export class EventListComponent implements OnInit {
 
   events: any[];
   allEventState = 'in';
-  selectedEventState = 'out';
-  selectedEvent: any;
 
   constructor(
     private _ds: DataService,
     private _route: ActivatedRoute,
+    private _router: Router,
+    public eventService: EventService,
     public lookupService: LookupService
-  ) { }
+  ) {
+    this.allEventState = 'in';
+  }
 
   ngOnInit() {
     this._route.data.subscribe(
@@ -37,17 +40,12 @@ export class EventListComponent implements OnInit {
     );
   }
 
-  openEventDetails(event) {
+  navigateToEventDetail(event) {
     if (event) {
-      this.selectedEvent = event;
+      this.eventService.selectedEvent = event;
     }
     this.allEventState = 'out';
-    this.selectedEventState = 'in';
-  }
-
-  closeEventDetails() {
-    this.allEventState = 'in';
-    this.selectedEventState = 'out';
+    this._router.navigate([`/events/${event.event_id__c}`]);
   }
 
 }

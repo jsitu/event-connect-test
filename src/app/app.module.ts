@@ -9,9 +9,11 @@ import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { EventListComponent } from './event-list/event-list.component';
+import { EventDetailComponent } from './event-list/event-detail/event-detail.component';
 
 import { DataService } from './services/data.service';
 import { LookupService } from './services/lookup.service';
+import { EventService } from './event-list/event.service';
 
 import { EventsResolver } from './resolvers/events.resolver';
 
@@ -21,6 +23,7 @@ import { DateTimePipe } from './pipes/date-time.pipe';
   declarations: [
     AppComponent,
     EventListComponent,
+    EventDetailComponent,
     DateTimePipe
   ],
   imports: [
@@ -32,7 +35,7 @@ import { DateTimePipe } from './pipes/date-time.pipe';
     MaterialModule,
     MdTooltipModule
   ],
-  providers: [DataService, LookupService, EventsResolver],
+  providers: [DataService, LookupService, EventsResolver, EventService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

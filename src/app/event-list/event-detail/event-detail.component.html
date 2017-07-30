@@ -1,0 +1,56 @@
+<section id="event-detail-container" [@eventAnimTrigger]="selectedEventState">
+  <a (click)="navigateToEventList()" id="back-link"><i class="material-icons">arrow_back</i><span>&nbsp;Back</span></a>
+  <md-card class="event-detail-card">
+    <md-card-content>
+      <section class="event-header">
+        <div class="cover-image-wrapper">
+          <img [src]="eventService.selectedEvent?.cover_image_url__c ? eventService.selectedEvent.cover_image_url__c : lookupService.defaultEventCoverImageUrl">
+        </div>
+        <aside>
+          <p 
+            class="event-status" 
+            [ngClass]="{
+              'isDraft': eventService.selectedEvent?.status__c == 'Draft',
+              'isOpen': eventService.selectedEvent?.status__c == 'Open',
+              'isSoldOut': eventService.selectedEvent?.status__c == 'Sold Out',
+              'isClosed': eventService.selectedEvent?.status__c == 'Closed'
+            }">
+            {{eventService.selectedEvent?.status__c}}
+          </p>
+          <p class="event-title">{{eventService.selectedEvent?.title__c | uppercase}}</p>
+          <p class="event-remaining-seats" *ngIf="eventService.selectedEvent?.status__c == 'Open'">{{eventService.selectedEvent?.remaining_seats__c}} spots left</p>
+          <button md-raised-button class="event-register-button" [disabled]="eventService.selectedEvent?.status__c !== 'Open'">Register</button>
+        </aside>
+      </section>
+      <section class="event-content">
+        <section class="event-description" *ngIf="eventService.selectedEvent?.description__c">
+          <h4>Description</h4>
+          <div>{{eventService.selectedEvent?.description__c}}</div>
+        </section>
+        <aside>
+          <div class="event-date-time">
+            <h4>Date And Time</h4>
+            <span class="event-start-time">
+              {{eventService.selectedEvent?.start__c | DateTime: 'date-long'}}
+            </span>
+            <span>
+              {{eventService.selectedEvent?.start__c | DateTime: 'time'}} - {{eventService.selectedEvent?.end__c | DateTime: 'time'}}
+            </span>
+          </div>
+          <div class="event-location">
+            <h4>Location</h4>
+            <p>{{eventService.selectedEvent?.address__c}}</p>
+            <p>
+              <span>{{eventService.selectedEvent?.city__c}},</span>
+              <span>{{eventService.selectedEvent?.state__c}}</span>
+              <span>{{eventService.selectedEvent?.zip__c}}</span>
+            </p>
+          </div>
+        </aside>
+      </section>
+    </md-card-content>
+    <md-card-actions>
+
+    </md-card-actions>
+  </md-card>
+</section>

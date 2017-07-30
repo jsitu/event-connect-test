@@ -10,5 +10,9 @@ export class DataService {
 
   getEventList(): Promise<any> {
     return this._http.get('/api/events').toPromise();
+  };
+
+  getEventById(id: string): Promise<any> {
+    return this._http.get(`/api/events/${id}`).toPromise();
   }
 }
