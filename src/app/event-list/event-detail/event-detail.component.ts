@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MdDialog } from '@angular/material';
 import { DataService } from './../../services/data.service';
 import { EventService } from './../event.service';
 import { LookupService } from './../../services/lookup.service';
 import { eventEnterLeaveAnimationTrigger } from '../../animations/event.animations';
+import { EventRegisterComponent } from './event-register/event-register.component';
 
 @Component({
   selector: 'app-event-detail',
@@ -19,6 +21,7 @@ export class EventDetailComponent implements OnInit {
     private _ds: DataService,
     private _route: ActivatedRoute,
     private _router: Router,
+    public eventRegisterDialog: MdDialog,
     public eventService: EventService,
     public lookupService: LookupService
   ) {
@@ -48,6 +51,15 @@ export class EventDetailComponent implements OnInit {
   navigateToEventList() {
     this.selectedEventState = 'out';
     this._router.navigate(['/events']);
+  }
+
+  openEventRegisterDialog(sessions: any) {
+    const dialogRef = this.eventRegisterDialog.open(EventRegisterComponent, {
+      data: {
+        eventId: this.eventService.selectedEvent.event_id__c,
+        sessions: sessions
+      }
+    });
   }
 
 }

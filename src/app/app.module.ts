@@ -3,13 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule, MdTooltipModule } from '@angular/material';
+import { MaterialModule, MdTooltipModule, MdDialogModule } from '@angular/material';
 import { AppRouteModule } from './app.route';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { EventDetailComponent } from './event-list/event-detail/event-detail.component';
+import { EventRegisterComponent } from './event-list/event-detail/event-register/event-register.component';
 
 import { DataService } from './services/data.service';
 import { LookupService } from './services/lookup.service';
@@ -25,6 +26,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     AppComponent,
     EventListComponent,
     EventDetailComponent,
+    EventRegisterComponent,
     DateTimePipe,
     OrderByPipe
   ],
@@ -35,8 +37,10 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     AppRouteModule,
     BrowserAnimationsModule,
     MaterialModule,
-    MdTooltipModule
+    MdTooltipModule,
+    MdDialogModule
   ],
+  entryComponents: [EventRegisterComponent],
   providers: [DataService, LookupService, EventsResolver, EventService],
   bootstrap: [AppComponent]
 })

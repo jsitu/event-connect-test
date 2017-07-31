@@ -7,10 +7,10 @@
         <p 
           class="event-status" 
           [ngClass]="{
-            'isDraft': event.status__c == 'Draft',
-            'isOpen': event.status__c == 'Open',
-            'isSoldOut': event.status__c == 'Sold Out',
-            'isClosed': event.status__c == 'Closed'
+            'isDraft': eventService.isEventDraft(event),
+            'isOpen': eventService.isEventOpen(event),
+            'isSoldOut': eventService.isEventSoldOut(event),
+            'isClosed': eventService.isEventSoldOut(event)
           }">
           {{event.status__c}}
         </p>
@@ -19,7 +19,7 @@
       <p class="event-address">{{event.address__c}}, {{event.city__c}}  {{event.state__c}}</p>
     </md-card-content>
     <md-card-actions>
-      <span *ngIf="event.status__c == 'Open'">{{event.remaining_seats__c}} spots left</span>
+      <span *ngIf="eventService.isEventOpen(event)">{{event.remaining_seats__c}} spots left</span>
       <div class="tooltip-host" mdTooltip="Share" mdTooltipPosition="above">
         <a><i class="material-icons">share</i></a>
       </div>

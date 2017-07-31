@@ -1,0 +1,81 @@
+div.dialog-title {
+    display: flex;
+    text-align: center;
+    position: relative;
+}
+
+div.dialog-title span {
+    flex: 1;
+    align-self: center;
+}
+
+div.dialog-title a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+div.dialog-title a.back-button {
+    left: 0;
+    right: auto;
+}
+
+div.dialog-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 50vw;
+    min-height: 50vh;
+}
+
+div.dialog-content h4 {
+    margin-bottom: 2em;
+    font-weight: normal;
+}
+
+div.session-container {
+    display: flex;
+    border: 1px solid #ccc;
+    border-left: .5em solid #bbb;
+    box-sizing: border-box;
+    margin-top: .5em;
+    padding: 1em;
+}
+
+div.session-container.selected {
+    border-left: .5em solid #01ab45;
+}
+
+div.session-container div.session-title {
+    display: flex;
+    flex-direction: column;
+}
+
+div.session-container div.session-title span:first-child {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+div.session-container div.session-title span:last-child {
+    font-size: 0.85em;
+}
+
+div.session-container div.session-register-check {
+    margin-left: auto;
+    align-self: center;
+    margin-right: .5em;
+}
+
+div.session-container div.session-register-check md-checkbox {
+    transform: scale(1.2);
+}
+
+div.dialog-actions button.checkout-button {
+    margin: 0 auto;
+    background: #01ab45;
+    color: #fff;
+    width: 15em;
+    padding: .4em;
+    font-size: 1.1em;
+}

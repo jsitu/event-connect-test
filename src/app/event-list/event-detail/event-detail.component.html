@@ -10,16 +10,20 @@
           <p 
             class="event-status" 
             [ngClass]="{
-              'isDraft': eventService.selectedEvent?.status__c == 'Draft',
-              'isOpen': eventService.selectedEvent?.status__c == 'Open',
-              'isSoldOut': eventService.selectedEvent?.status__c == 'Sold Out',
-              'isClosed': eventService.selectedEvent?.status__c == 'Closed'
+              'isDraft': eventService.isEventDraft(eventService.selectedEvent),
+              'isOpen': eventService.isEventOpen(eventService.selectedEvent),
+              'isSoldOut': eventService.isEventSoldOut(eventService.selectedEvent),
+              'isClosed': eventService.isEventClosed(eventService.selectedEvent)
             }">
             {{eventService.selectedEvent?.status__c}}
           </p>
           <p class="event-title">{{eventService.selectedEvent?.title__c | uppercase}}</p>
           <p class="event-remaining-seats" *ngIf="eventService.selectedEvent?.status__c == 'Open'">{{eventService.selectedEvent?.remaining_seats__c}} spots left</p>
-          <button md-raised-button class="event-register-button" [disabled]="eventService.selectedEvent?.status__c !== 'Open' || eventService.selectedEvent?.remaining_seats__c == 0 || eventService.selectedEvent?.remaining_seats__c < 0">Register</button>
+          <button 
+            md-raised-button 
+            class="event-register-button" 
+            (click)="openEventRegisterDialog(eventService.selectedEvent?.sessions__r.records)"
+            [disabled]="!eventService.isEventOpen(eventService.selectedEvent) || eventService.selectedEvent?.remaining_seats__c == 0 || eventService.selectedEvent?.remaining_seats__c < 0">Register</button>
         </aside>
       </section>
       <section class="event-content">
@@ -40,10 +44,10 @@
                 <td>{{session.Start__c | DateTime: 'time'}} - {{session.End__c | DateTime: 'time'}}</td>
                 <td>{{session.Title__c}}</td>
                 <td [ngClass]="{
-                  'isDraft': session.Status__c == 'Draft',
-                  'isOpen': session.Status__c == 'Open',
-                  'isSoldOut': session.Status__c == 'Sold Out',
-                  'isClosed': session.Status__c == 'Closed'
+                  'isDraft': eventService.isEventSessionDraft(session),
+                  'isOpen': eventService.isEventSessionOpen(session),
+                  'isSoldOut': eventService.isEventSessionSoldOut(session),
+                  'isClosed': eventService.isEventSessionClosed(session)
                 }">{{session.Status__c}}</td>
               </tr>
             </table>

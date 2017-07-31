@@ -1,0 +1,46 @@
+<section class="dialog-container">
+  <div *ngIf="!isConfirmRegistrationInfoActive">
+    <div md-dialog-title class="dialog-title">
+      <span>Register</span>
+      <a (click)="closeDialog()"><i class="material-icons">clear</i></a>
+    </div>
+    <div md-dialog-content class="dialog-content">
+      <div *ngFor="let session of sessions | orderBy: 'Start__c'" class="session-container" [ngClass]="{'selected': session.isSelected}">
+        <div class="session-title">
+          <span>{{session.Title__c}}</span>
+          <span *ngIf="session.Remaining_Seats__c > 1; else onlyOneSeatLeft">{{session.Remaining_Seats__c}} spots left</span>
+          <ng-template #onlyOneSeatLeft>
+            <span>Hurry, only 1 spot left!</span>
+          </ng-template>
+        </div>
+        <div class="session-register-check">
+          <span *ngIf="eventService.isEventSessionSoldOut(session)">Sold Out</span>
+          <span *ngIf="eventService.isEventSessionClosed(session)">Closed</span>
+          <md-checkbox 
+            class="select-session" 
+            color="primary"
+            [(ngModel)]="session.isSelected"
+            *ngIf="eventService.isEventSessionOpen(session)">
+          </md-checkbox>
+        </div>
+      </div>
+    </div>
+    <div md-dialog-actions class="dialog-actions">
+      <button md-raised-button class="checkout-button" (click)="confirmRegistrationInfo()">Checkout</button>
+    </div>
+  </div>
+  
+  <div *ngIf="isConfirmRegistrationInfoActive">
+    <div md-dialog-title class="dialog-title">
+      <a (click)="back()" class="back-button"><i class="material-icons">arrow_back</i></a>
+      <span>Registration Information</span>
+      <a (click)="closeDialog()"><i class="material-icons">clear</i></a>
+    </div>
+    <div md-dialog-content class="dialog-content">
+      
+    </div>
+    <div md-dialog-actions class="dialog-actions">
+      <button md-raised-button class="checkout-button complete-registration-button" (click)="completeRegistration()">Complete Registration</button>
+    </div>
+  </div>
+</section>
