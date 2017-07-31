@@ -3,7 +3,7 @@ import { ActivatedRoute, Data, Router } from '@angular/router';
 import { DataService } from './../services/data.service';
 import { LookupService } from './../services/lookup.service';
 import { EventService } from './event.service';
-import { eventEnterLeaveAnimationTrigger } from '../animations/eventAnimations';
+import { eventEnterLeaveAnimationTrigger } from '../animations/event.animations';
 
 @Component({
   selector: 'app-event-list',
@@ -45,7 +45,11 @@ export class EventListComponent implements OnInit {
       this.eventService.selectedEvent = event;
     }
     this.allEventState = 'out';
-    this._router.navigate([`/events/${event.event_id__c}`]);
+
+    const _this = this;
+    setTimeout(function() {
+      _this._router.navigate([`/events/${event.event_id__c}`]);
+    }, 300);
   }
 
 }

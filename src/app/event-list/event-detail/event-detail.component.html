@@ -19,13 +19,35 @@
           </p>
           <p class="event-title">{{eventService.selectedEvent?.title__c | uppercase}}</p>
           <p class="event-remaining-seats" *ngIf="eventService.selectedEvent?.status__c == 'Open'">{{eventService.selectedEvent?.remaining_seats__c}} spots left</p>
-          <button md-raised-button class="event-register-button" [disabled]="eventService.selectedEvent?.status__c !== 'Open'">Register</button>
+          <button md-raised-button class="event-register-button" [disabled]="eventService.selectedEvent?.status__c !== 'Open' || eventService.selectedEvent?.remaining_seats__c == 0 || eventService.selectedEvent?.remaining_seats__c < 0">Register</button>
         </aside>
       </section>
       <section class="event-content">
         <section class="event-description" *ngIf="eventService.selectedEvent?.description__c">
-          <h4>Description</h4>
-          <div>{{eventService.selectedEvent?.description__c}}</div>
+          <div class="event-description-content">
+            <h4>Description</h4>
+            <div>{{eventService.selectedEvent?.description__c}}</div>
+          </div>
+          <div class="event-session-content" *ngIf="eventService.selectedEvent?.sessions__r && eventService.selectedEvent?.remaining_seats__c > 0">
+            <h4>Sessions</h4>
+            <table>
+              <tr>
+                <th>Time</th>
+                <th>Title</th>
+                <th></th>
+              </tr>
+              <tr *ngFor="let session of eventService.selectedEvent?.sessions__r.records | orderBy: 'Start__c'">
+                <td>{{session.Start__c | DateTime: 'time'}} - {{session.End__c | DateTime: 'time'}}</td>
+                <td>{{session.Title__c}}</td>
+                <td [ngClass]="{
+                  'isDraft': session.Status__c == 'Draft',
+                  'isOpen': session.Status__c == 'Open',
+                  'isSoldOut': session.Status__c == 'Sold Out',
+                  'isClosed': session.Status__c == 'Closed'
+                }">{{session.Status__c}}</td>
+              </tr>
+            </table>
+          </div>
         </section>
         <aside>
           <div class="event-date-time">

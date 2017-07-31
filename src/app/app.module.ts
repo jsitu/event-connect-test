@@ -18,13 +18,15 @@ import { EventService } from './event-list/event.service';
 import { EventsResolver } from './resolvers/events.resolver';
 
 import { DateTimePipe } from './pipes/date-time.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventListComponent,
     EventDetailComponent,
-    DateTimePipe
+    DateTimePipe,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,

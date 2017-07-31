@@ -3,7 +3,8 @@ section#event-detail-container {
     flex-direction: column;
     width: 100%;
     max-width: 980px;
-    height: 95vh;
+    height: auto;
+    min-height: 95vh;
     margin: 0 auto;
     padding: 0;
     align-items: center;
@@ -25,7 +26,8 @@ md-card.event-detail-card {
     width: 960px;
     flex-direction: column;
     padding: 0;
-    height: 85vh;
+    height: auto;
+    min-height: 85vh;
 }
 
 md-card.event-detail-card section.event-header {
@@ -130,8 +132,62 @@ md-card.event-detail-card section.event-content section.event-description h4 {
 }
 
 md-card.event-detail-card section.event-content section.event-description div {
-    font-size: 1.1em;
+    font-size: 1em;
     line-height: 1.5em;
+}
+
+md-card.event-detail-card section.event-content section.event-description div.event-session-content {
+    margin-top: 3.5em;
+}
+
+md-card.event-detail-card section.event-content section.event-description div.event-session-content table {
+    font-size: .95em;
+}
+
+md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr th {
+    text-align: left;
+    padding-right: 1em;
+    font-size: .95em;
+}
+
+md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td {
+    padding-right: 1em;
+}
+
+md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td.isDraft {
+    background: #FBC02D;
+    color: #fff;
+    text-align: center;
+    padding: 0;
+    width: 6em;
+    font-size: .9em;
+}
+
+md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td.isOpen {
+    background: #4caf50;
+    color: #fff;
+    text-align: center;
+    padding: 0;
+    width: 6em;
+    font-size: .9em;
+}
+
+md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td.isSoldOut {
+    background: #F44336;
+    color: #fff;
+    text-align: center;
+    padding: 0;
+    width: 6em;
+    font-size: .9em;
+}
+
+md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td.isClosed {
+    background: #9E9E9E;
+    color: #fff;
+    text-align: center;
+    padding: 0;
+    width: 6em;
+    font-size: .9em;
 }
 
 md-card.event-detail-card section.event-content aside {
@@ -154,7 +210,7 @@ md-card.event-detail-card section.event-content aside div.event-date-time h4 {
 
 md-card.event-detail-card section.event-content aside div.event-date-time span {
     display: block;
-    font-size: 1.1em;
+    font-size: 1em;
     line-height: 1.5em;
     margin-bottom: .3em;
 }
@@ -169,7 +225,7 @@ md-card.event-detail-card section.event-content aside div.event-location h4 {
 }
 
 md-card.event-detail-card section.event-content aside div.event-location p {
-    font-size: 1.1em;
+    font-size: 1em;
     line-height: 1.5em;
     margin: 0;
 }

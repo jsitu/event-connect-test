@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from './../../services/data.service';
 import { EventService } from './../event.service';
 import { LookupService } from './../../services/lookup.service';
-import { eventEnterLeaveAnimationTrigger } from '../../animations/eventAnimations';
+import { eventEnterLeaveAnimationTrigger } from '../../animations/event.animations';
 
 @Component({
   selector: 'app-event-detail',
