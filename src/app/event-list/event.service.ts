@@ -28,6 +28,10 @@ export class EventService {
       return true;
     }
 
+    if (event && event.remaining_seats__c === 0 || event && event.remaining_seats__c < 0) {
+      return true;
+    }
+
     return false;
   }
 
@@ -57,6 +61,10 @@ export class EventService {
 
   isEventSessionSoldOut(session: any) {
     if (session && session.Status__c.toLowerCase().trim() === 'sold out') {
+      return true;
+    }
+
+    if (session && session.Remaining_Seats__c === 0 || session && session.Remaining_Seats__c < 0) {
       return true;
     }
 

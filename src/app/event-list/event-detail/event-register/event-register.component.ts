@@ -3,6 +3,7 @@ import { DataService } from './../../../services/data.service';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { EventService } from './../../event.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-event-register',
@@ -86,9 +87,39 @@ export class EventRegisterComponent implements OnInit {
             Attendee__c: attendeeId,
             Event__c: this.eventId
           }).then(
-            (response) => {
-              console.log(response);
-              this.isRegistrationSuccessful = true;
+            // tslint:disable-next-line:no-shadowed-variable
+            (res) => {
+              console.log('Event Registration Success!');
+              const selectedSessionCount = _.filter(this.sessions, (session) => {
+                return session.isSelected === true;
+              }).length;
+
+              let selectedSessionRegistationSuccessCount = 0;
+              if (selectedSessionCount > 0) {
+                this.sessions.forEach(session => {
+                  this._ds.createSessionAttendeeAssociation({
+                    Attendee__c: attendeeId,
+                    Session__c: session.Id
+                  }).then(
+                    // tslint:disable-next-line:no-shadowed-variable
+                    (res) => {
+                      console.log('Session Registration Success!');
+                      selectedSessionRegistationSuccessCount++;
+
+                      if (selectedSessionRegistationSuccessCount === selectedSessionCount) {
+                        this.isRegistrationSuccessful = true;
+                      }
+                    }
+                  ).catch(
+                    (error) => {
+                      this.isRegistrationFailed = true;
+                      console.log(error);
+                    }
+                  );
+                });
+              } else {
+                this.isRegistrationSuccessful = true;
+              }
             }
           ).catch(
             (error) => {

@@ -44,13 +44,20 @@
               <tr *ngFor="let session of eventService.selectedEvent?.sessions__r.records | orderBy: 'Start__c'">
                 <td>{{session.Start__c | DateTime: 'time'}} - {{session.End__c | DateTime: 'time'}}</td>
                 <td>{{session.Title__c}}</td>
-                <td>{{session.Remaining_Seats__c}} / {{session.Registration_Limit__c}}</td>
+                <td>
+                  <span *ngIf="eventService.isEventSessionOpen(session); else eventUnavailable">{{session.Remaining_Seats__c}} / {{session.Registration_Limit__c}}</span>
+                  <ng-template #eventUnavailable>
+                    <span>0 / {{session.Registration_Limit__c}}</span>
+                  </ng-template>
+                </td>
                 <td [ngClass]="{
                   'isDraft': eventService.isEventSessionDraft(session),
                   'isOpen': eventService.isEventSessionOpen(session),
                   'isSoldOut': eventService.isEventSessionSoldOut(session),
                   'isClosed': eventService.isEventSessionClosed(session)
-                }">{{session.Status__c}}</td>
+                }">
+                  <span>{{session.Status__c}}</span>
+                </td>
               </tr>
             </table>
           </div>

@@ -18,7 +18,7 @@ md-card.event-card {
     display: flex;
     flex-direction: column;
     flex: 1;
-    max-width: 30%;
+    max-width: 24%;
     overflow: hidden;
     margin: .5em;
     padding: 15px;

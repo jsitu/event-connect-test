@@ -8,9 +8,13 @@
       <div *ngFor="let session of sessions | orderBy: 'Start__c'" class="session-container" [ngClass]="{'selected': session.isSelected}">
         <div class="session-title">
           <span>{{session.Title__c}}</span>
-          <span *ngIf="session.Remaining_Seats__c > 1; else onlyOneSeatLeft">{{session.Remaining_Seats__c}} spots left</span>
-          <ng-template #onlyOneSeatLeft>
-            <span>Hurry, only 1 spot left!</span>
+          <div *ngIf="eventService.isEventSessionOpen(session); else sessionUnavailable">
+            <span *ngIf="session.Remaining_Seats__c > 1">{{session.Remaining_Seats__c}} spots left</span>
+            <span *ngIf="session.Remaining_Seats__c == 1">Hurry, only 1 spot left!</span>
+            <span *ngIf="session.Remaining_Seats__c == 0 || session.Remaining_Seats__c < 0">Unavailable</span>
+          </div>
+          <ng-template #sessionUnavailable>
+            <span>Unavailable</span>
           </ng-template>
         </div>
         <div class="session-register-check">
@@ -20,7 +24,7 @@
             class="select-session" 
             color="primary"
             [(ngModel)]="session.isSelected"
-            *ngIf="eventService.isEventSessionOpen(session)">
+            *ngIf="eventService.isEventSessionOpen(session) && !eventService.isEventSessionSoldOut(session)">
           </md-checkbox>
         </div>
       </div>
@@ -110,7 +114,7 @@
     <div *ngIf="isRegistrationSuccessful && !isRegistrationFailed">
       <h4><i class="material-icons">check_circle</i><span>Registration Success!</span></h4>
       <p>Thank you for registering! A confirmation email is sent to {{registrationForm.value.email}}, please check your mailbox for event details.</p>
-      <button md-raised-button class="checkout-button complete-registration-button" (click)="closeDialog()">Done</button>
+      <button md-raised-button class="checkout-button complete-registration-button" (click)="refreshPage()">Done</button>
     </div>
     <div *ngIf="!isRegistrationSuccessful && isRegistrationFailed">
       <h4 class="fail-message"><i class="material-icons">error</i><span>Registration Fail</span></h4>

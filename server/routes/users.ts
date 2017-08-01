@@ -32,6 +32,20 @@ const getUsersRouter = (org: any) => {
         });
     });
 
+    usersRouter.post('/session', function(req, res) {
+        const sessionAttendee = req.body;
+        const saRelationship = nforce.createSObject('SessionAttendee__c', sessionAttendee);
+
+        org.insert({ sobject: saRelationship }, function (err, resp) {
+            if (err) {
+                console.log('Error: ' + err.message);
+            } else {
+                console.log('Session attendee association created.');
+                res.send(resp);
+            }
+        });
+    });
+
     return usersRouter;
 };
 
