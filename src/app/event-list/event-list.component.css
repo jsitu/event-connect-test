@@ -28,6 +28,10 @@ md-card.event-card {
     transition: all .3s linear;
 }
 
+md-card.event-card.hidden {
+    display: none;
+}
+
 md-card.event-card img {
     object-fit: contain;
     margin-bottom: .5em;

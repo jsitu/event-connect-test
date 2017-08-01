@@ -1,5 +1,5 @@
 <section id="event-list-container" [@eventAnimTrigger]="allEventState">
-  <md-card class="event-card" *ngFor="let event of events | orderBy: 'start__c'" [@eventAnimTrigger]="allEventState" (click)="navigateToEventDetail(event)">
+  <md-card class="event-card" [ngClass]="{'hidden': eventService.isEventDraft(event)}" *ngFor="let event of events | orderBy: 'start__c'" [@eventAnimTrigger]="allEventState" (click)="navigateToEventDetail(event)">
     <img md-card-image [src]="event.cover_image_url__c ? event.cover_image_url__c : lookupService.defaultEventCoverImageUrl">
     <md-card-content>
       <div>
