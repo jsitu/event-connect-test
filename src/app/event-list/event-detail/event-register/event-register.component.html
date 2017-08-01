@@ -39,7 +39,7 @@
       <a (click)="back()" class="back-button" *ngIf="!isRegistrationFormSubmitted && sessions.length > 0">
         <i class="material-icons">arrow_back</i>
       </a>
-      <span *ngIf="!isRegistrationFormSubmitted">Registration Information</span>
+      <span *ngIf="!isRegistrationFormSubmitted">Your Information</span>
       <span *ngIf="isRegistrationFormSubmitted">Confirmation</span>
       <a (click)="closeDialog()"><i class="material-icons">clear</i></a>
     </div>

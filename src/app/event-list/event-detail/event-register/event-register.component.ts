@@ -46,9 +46,9 @@ export class EventRegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.isConfirmRegistrationInfoActive) {
-      this.attendeeFirstName.nativeElement.focus();
-    }
+    // if (this.isConfirmRegistrationInfoActive) {
+    //   this.attendeeFirstName.nativeElement.focus();
+    // }
 
     this.registrationForm = this._formBuilder.group({
       firstName: ['', Validators.required],

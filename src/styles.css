@@ -15,4 +15,10 @@ html {
     body {
         margin: 0 !important;
     }
+
+    div.cdk-overlay-container div.cdk-global-overlay-wrapper md-dialog-container.mat-dialog-container {
+        max-width: 85vw;
+        width: 90vw;
+        height: 85vh;
+    }
 }
