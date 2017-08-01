@@ -155,39 +155,39 @@ md-card.event-detail-card section.event-content section.event-description div.ev
 }
 
 md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td.isDraft {
-    background: #FBC02D;
-    color: #fff;
+    color: #FBC02D;
     text-align: center;
     padding: 0;
     width: 6em;
     font-size: .9em;
+    font-weight: bold;
 }
 
 md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td.isOpen {
-    background: #4caf50;
-    color: #fff;
+    color: #4caf50;
     text-align: center;
     padding: 0;
     width: 6em;
     font-size: .9em;
+    font-weight: bold;
 }
 
 md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td.isSoldOut {
-    background: #F44336;
-    color: #fff;
+    color: #F44336;
     text-align: center;
     padding: 0;
     width: 6em;
     font-size: .9em;
+    font-weight: bold;
 }
 
 md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td.isClosed {
-    background: #9E9E9E;
-    color: #fff;
+    color: #9E9E9E;
     text-align: center;
     padding: 0;
     width: 6em;
     font-size: .9em;
+    font-weight: bold;
 }
 
 md-card.event-detail-card section.event-content aside {

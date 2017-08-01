@@ -1,5 +1,5 @@
 <section id="event-list-container" [@eventAnimTrigger]="allEventState">
-  <md-card class="event-card" *ngFor="let event of events" [@eventAnimTrigger]="allEventState" (click)="navigateToEventDetail(event)">
+  <md-card class="event-card" *ngFor="let event of events | orderBy: 'start__c'" [@eventAnimTrigger]="allEventState" (click)="navigateToEventDetail(event)">
     <img md-card-image [src]="event.cover_image_url__c ? event.cover_image_url__c : lookupService.defaultEventCoverImageUrl">
     <md-card-content>
       <div>
@@ -10,7 +10,7 @@
             'isDraft': eventService.isEventDraft(event),
             'isOpen': eventService.isEventOpen(event),
             'isSoldOut': eventService.isEventSoldOut(event),
-            'isClosed': eventService.isEventSoldOut(event)
+            'isClosed': eventService.isEventClosed(event)
           }">
           {{event.status__c}}
         </p>
@@ -19,7 +19,7 @@
       <p class="event-address">{{event.address__c}}, {{event.city__c}}  {{event.state__c}}</p>
     </md-card-content>
     <md-card-actions>
-      <span *ngIf="eventService.isEventOpen(event)">{{event.remaining_seats__c}} spots left</span>
+      <span *ngIf="eventService.isEventOpen(event)">{{event.remaining_seats__c}} spots left / {{event.registration_limit__c}} total seats</span>
       <div class="tooltip-host" mdTooltip="Share" mdTooltipPosition="above">
         <a><i class="material-icons">share</i></a>
       </div>

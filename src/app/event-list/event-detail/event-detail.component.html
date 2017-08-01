@@ -18,7 +18,7 @@
             {{eventService.selectedEvent?.status__c}}
           </p>
           <p class="event-title">{{eventService.selectedEvent?.title__c | uppercase}}</p>
-          <p class="event-remaining-seats" *ngIf="eventService.selectedEvent?.status__c == 'Open'">{{eventService.selectedEvent?.remaining_seats__c}} spots left</p>
+          <p class="event-remaining-seats" *ngIf="eventService.selectedEvent?.status__c == 'Open'">{{eventService.selectedEvent?.remaining_seats__c}} spots left / {{eventService.selectedEvent?.registration_limit__c}} total seats</p>
           <button 
             md-raised-button 
             class="event-register-button" 
@@ -30,7 +30,7 @@
         <section class="event-description" *ngIf="eventService.selectedEvent?.description__c">
           <div class="event-description-content">
             <h4>Description</h4>
-            <div>{{eventService.selectedEvent?.description__c}}</div>
+            <div [innerHTML]="eventService.selectedEvent?.description__c"></div>
           </div>
           <div class="event-session-content" *ngIf="eventService.selectedEvent?.sessions__r && eventService.selectedEvent?.remaining_seats__c > 0">
             <h4>Sessions</h4>
@@ -38,11 +38,13 @@
               <tr>
                 <th>Time</th>
                 <th>Title</th>
+                <th>Availability<th>
                 <th></th>
               </tr>
               <tr *ngFor="let session of eventService.selectedEvent?.sessions__r.records | orderBy: 'Start__c'">
                 <td>{{session.Start__c | DateTime: 'time'}} - {{session.End__c | DateTime: 'time'}}</td>
                 <td>{{session.Title__c}}</td>
+                <td>{{session.Remaining_Seats__c}} / {{session.Registration_Limit__c}}</td>
                 <td [ngClass]="{
                   'isDraft': eventService.isEventSessionDraft(session),
                   'isOpen': eventService.isEventSessionOpen(session),
