@@ -121,7 +121,6 @@ md-card-actions div.tooltip-host a i {
     color: #6d7074;
 }
 
-/* Portrait and Landscape */
 @media only screen 
   and (min-device-width: 320px) 
   and (max-device-width: 1023px)

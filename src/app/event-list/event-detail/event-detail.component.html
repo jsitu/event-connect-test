@@ -60,6 +60,24 @@
                 </td>
               </tr>
             </table>
+            <ul *ngFor="let session of eventService.selectedEvent?.sessions__r?.records | orderBy: 'Start__c'" class="session-items-small-screen">
+              <li>{{session.Start__c | DateTime: 'time'}} - {{session.End__c | DateTime: 'time'}}</li>
+              <li class="session-item-title">{{session.Title__c}}</li>
+              <li>
+                <span *ngIf="eventService.isEventSessionOpen(session); else eventUnavailable">{{session.Remaining_Seats__c}} available / {{session.Registration_Limit__c}} total seats</span>
+                <ng-template #eventUnavailable>
+                  <span>0 available / {{session.Registration_Limit__c}} seats</span>
+                </ng-template>
+              </li>
+              <li [ngClass]="{
+                'isDraft': eventService.isEventSessionDraft(session),
+                'isOpen': eventService.isEventSessionOpen(session),
+                'isSoldOut': eventService.isEventSessionSoldOut(session),
+                'isClosed': eventService.isEventSessionClosed(session)
+              }">
+                <span>{{session.Status__c}}</span>
+              </li>
+            </ul>
           </div>
         </section>
         <aside>
@@ -84,8 +102,5 @@
         </aside>
       </section>
     </md-card-content>
-    <md-card-actions>
-
-    </md-card-actions>
   </md-card>
 </section>
