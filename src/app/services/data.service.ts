@@ -14,5 +14,14 @@ export class DataService {
 
   getEventById(id: string): Promise<any> {
     return this._http.get(`/api/events/${id}`).toPromise();
+  };
+
+  createAttendee(attendee: any): Promise<any> {
+    return this._http.post('/api/users', attendee).toPromise();
   }
+
+  createEventAttendeeAssociation(eventAttendee: any): Promise<any> {
+    return this._http.post('/api/users/event', eventAttendee).toPromise();
+  }
+
 }

@@ -48,7 +48,7 @@ export class EventListComponent implements OnInit {
 
     const _this = this;
     setTimeout(function() {
-      _this._router.navigate([`/events/${event.event_id__c}`]);
+      _this._router.navigate([`/events/${event.id}`]);
     }, 300);
   }
 

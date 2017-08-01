@@ -1,5 +1,5 @@
 <section class="dialog-container">
-  <div *ngIf="!isConfirmRegistrationInfoActive">
+  <div [ngClass]="{'hidden': isConfirmRegistrationInfoActive}">
     <div md-dialog-title class="dialog-title">
       <span>Register</span>
       <a (click)="closeDialog()"><i class="material-icons">clear</i></a>
@@ -30,17 +30,87 @@
     </div>
   </div>
   
-  <div *ngIf="isConfirmRegistrationInfoActive">
+  <div [ngClass]="{'hidden': !isConfirmRegistrationInfoActive}">
     <div md-dialog-title class="dialog-title">
-      <a (click)="back()" class="back-button"><i class="material-icons">arrow_back</i></a>
-      <span>Registration Information</span>
+      <a (click)="back()" class="back-button" *ngIf="!isRegistrationFormSubmitted"><i class="material-icons">arrow_back</i></a>
+      <span *ngIf="!isRegistrationFormSubmitted">Registration Information</span>
+      <span *ngIf="isRegistrationFormSubmitted">Confirmation</span>
       <a (click)="closeDialog()"><i class="material-icons">clear</i></a>
     </div>
+    <form 
+      class="registration-form" 
+      [formGroup]="registrationForm" 
+      (ngSubmit)="onRegistrationFormSubmit()"
+      novalidate>
     <div md-dialog-content class="dialog-content">
-      
+        <md-input-container class="form-full-width">
+          <input 
+            mdInput 
+            placeholder="First Name *"
+            formControlName="firstName"
+            #attendeeFirstName
+            ngModel>
+        </md-input-container>
+        <div class="validation-errors" *ngIf="registrationForm.controls.firstName.errors?.required && registrationForm.controls.firstName.touched">
+          <md-error>First name is <strong>required</strong></md-error>
+        </div>
+
+        <md-input-container class="form-full-width">
+        <input 
+          mdInput 
+          placeholder="Last Name *"
+          formControlName="lastName"
+          ngModel>
+        </md-input-container>
+        <div class="validation-errors" *ngIf="registrationForm.controls.lastName.errors?.required && registrationForm.controls.lastName.touched">
+          <md-error>Last name is <strong>required</strong></md-error>
+        </div>
+
+        <md-input-container class="form-full-width">
+          <input 
+            mdInput 
+            placeholder="Phone *"
+            formControlName="phone"
+            ngModel>
+        </md-input-container>
+        <div class="validation-errors" *ngIf="registrationForm.controls.phone.errors?.required && registrationForm.controls.phone.touched">
+          <md-error>Phone is <strong>required</strong></md-error>
+        </div>
+        
+        <md-input-container class="form-full-width">
+          <input 
+            mdInput 
+            placeholder="Email *"
+            formControlName="email"
+            ngModel>
+        </md-input-container>
+        <div class="validation-errors" *ngIf="
+        registrationForm.controls.email.errors?.required && registrationForm.controls.email.touched || 
+        !registrationForm.controls.email.valid && registrationForm.controls.email.touched">
+          <md-error *ngIf="registrationForm.controls.email.errors?.required && registrationForm.controls.email.touched">Email is <strong>required</strong></md-error>
+          <md-error *ngIf="!registrationForm.controls.email.valid && registrationForm.controls.email.touched">Please enter a valid email address</md-error>
+        </div>
+
+        <md-input-container class="form-full-width">
+          <input 
+            mdInput 
+            placeholder="Company"
+            formControlName="company"
+            ngModel>
+        </md-input-container>
     </div>
     <div md-dialog-actions class="dialog-actions">
-      <button md-raised-button class="checkout-button complete-registration-button" (click)="completeRegistration()">Complete Registration</button>
+      <button md-raised-button type="submit" class="checkout-button complete-registration-button" [disabled]="registrationForm.invalid">Complete Registration</button>
+    </div>
+    </form>
+  </div>
+
+  <div class="registration-submit-loading" *ngIf="isRegistrationFormSubmitted">
+    <md-spinner *ngIf="!isRegistrationSuccessful"></md-spinner>
+    <div *ngIf="isRegistrationSuccessful">
+      <h4><i class="material-icons">check_circle</i>&nbsp;Registration Success!</h4>
+      <p>Thank you for registering! A confirmation email is sent to {{registrationForm.value.email}}, please check your mailbox for event details.</p>
+      <button md-raised-button class="checkout-button complete-registration-button" (click)="closeDialog()">Done</button>
     </div>
   </div>
 </section>

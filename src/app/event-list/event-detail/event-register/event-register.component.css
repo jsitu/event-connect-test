@@ -1,3 +1,14 @@
+section.dialog-container {
+    position: relative;
+}
+
+section.dialog-container div.hidden {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
 div.dialog-title {
     display: flex;
     text-align: center;
@@ -78,4 +89,61 @@ div.dialog-actions button.checkout-button {
     width: 15em;
     padding: .4em;
     font-size: 1.1em;
+}
+
+div.dialog-actions button.checkout-button[disabled] {
+    background: #9E9E9E;
+    cursor: not-allowed;
+}
+
+div.dialog-content md-input-container {
+    width: 85%;
+    margin: 0 auto;
+}
+
+div.validation-errors {
+  margin-top: -1.2em;
+}
+
+div.validation-errors md-error {
+    width: 85%;
+    font-size: .8em;
+    margin: 0 auto;
+}
+
+div.registration-submit-loading {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+}
+
+div.registration-submit-loading div {
+    display: flex;
+    align-self: flex-start;
+    flex-direction: column;
+    height: 100%;
+}
+
+div.registration-submit-loading div h4 {
+    font-size: 1.2em;
+    color: #01ab45;
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+div.registration-submit-loading div button {
+    margin-top: auto;
+    margin-bottom: 1em;
+    padding: .4em;
+    font-size: 1em;
+    background: #01ab45;
+    color: #fff;
 }

@@ -5,6 +5,7 @@ import * as nforce from 'nforce';
 import * as config from './config';
 
 import { getEventsRouter } from './routes/events';
+import { getUsersRouter } from './routes/users';
 
 /* These need to be during production deployment */
 import * as https from 'https';
@@ -42,6 +43,7 @@ org.authenticate(config.sfCred, function(err, resp) {
 
 // api routes
 app.use('/api/events', getEventsRouter(org));
+app.use('/api/users', getUsersRouter(org));
 
 // this path location strategy is to let Angular handle all the routing
 app.get('/*', function(req, res) {
