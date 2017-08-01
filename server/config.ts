@@ -14,9 +14,8 @@ export const sfClientId = '3MVG9zlTNB8o8BA32zL1fZQgQUSvJf4PmET9ROyYedU9cyygJ_Gy0
 export const sfClientSecret = '1708988462682560803';
 
 // Local server settings
-export const localSSLOptions = {
-    key: fs.readFileSync(path.join(__dirname + '/key.pem'), 'utf8'),
-    cert: fs.readFileSync(path.join(__dirname + '/cert.pem'), 'utf8'),
-    passphrase: 'asdf'
-};
-export const Hello = 'Hello';
+// export const localSSLOptions = {
+//     key: fs.readFileSync(path.join(__dirname + '/key.pem'), 'utf8'),
+//     cert: fs.readFileSync(path.join(__dirname + '/cert.pem'), 'utf8'),
+//     passphrase: 'asdf'
+// };

@@ -20,16 +20,16 @@ let oauth;
 const org = nforce.createConnection({
   clientId: config.sfClientId,
   clientSecret: config.sfClientSecret,
-  redirectUri: config.sfCallBackUrlLocal,
+  redirectUri: config.sfCallBackUrlProduction,
   environment: 'production',
   mode: 'single',
   autoRefresh: true
 });
 
 // Local Test Mode
-https.createServer(config.localSSLOptions, app).listen(process.env.PORT || config.localServerPort);
+// https.createServer(config.localSSLOptions, app).listen(process.env.PORT || config.localServerPort);
 // Production Mode
-// app.listen(process.env.PORT || config.localServerPort);
+app.listen(process.env.PORT || config.localServerPort);
 console.log('Server Running');
 
 org.authenticate(config.sfCred, function(err, resp) {
