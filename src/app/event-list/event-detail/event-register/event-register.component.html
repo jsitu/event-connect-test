@@ -106,11 +106,16 @@
   </div>
 
   <div class="registration-submit-loading" *ngIf="isRegistrationFormSubmitted">
-    <md-spinner *ngIf="!isRegistrationSuccessful"></md-spinner>
-    <div *ngIf="isRegistrationSuccessful">
-      <h4><i class="material-icons">check_circle</i>&nbsp;Registration Success!</h4>
+    <md-spinner *ngIf="!isRegistrationSuccessful && !isRegistrationFailed"></md-spinner>
+    <div *ngIf="isRegistrationSuccessful && !isRegistrationFailed">
+      <h4><i class="material-icons">check_circle</i><span>Registration Success!</span></h4>
       <p>Thank you for registering! A confirmation email is sent to {{registrationForm.value.email}}, please check your mailbox for event details.</p>
       <button md-raised-button class="checkout-button complete-registration-button" (click)="closeDialog()">Done</button>
+    </div>
+    <div *ngIf="!isRegistrationSuccessful && isRegistrationFailed">
+      <h4 class="fail-message"><i class="material-icons">error</i><span>Registration Fail</span></h4>
+      <p>Uh oh! Something went wrong, please refresh the page and try again, sorry for the inconvenience.</p>
+      <button md-raised-button class="checkout-button complete-registration-button refresh-button" (click)="refreshPage()">Refresh</button>
     </div>
   </div>
 </section>

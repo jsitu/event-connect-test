@@ -133,10 +133,21 @@ div.registration-submit-loading div {
 }
 
 div.registration-submit-loading div h4 {
+    display: flex;
     font-size: 1.2em;
     color: #01ab45;
     text-align: center;
     margin-bottom: 2em;
+    justify-content: center;
+    align-items: center;
+}
+
+div.registration-submit-loading div h4 span {
+    margin-left: 5px;
+}
+
+div.registration-submit-loading div h4.fail-message {
+    color: #D32F2F;
 }
 
 div.registration-submit-loading div button {
@@ -145,5 +156,10 @@ div.registration-submit-loading div button {
     padding: .4em;
     font-size: 1em;
     background: #01ab45;
+    color: #fff;
+}
+
+div.registration-submit-loading div button.refresh-button {
+    background: #D32F2F;
     color: #fff;
 }

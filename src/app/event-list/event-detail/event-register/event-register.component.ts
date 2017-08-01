@@ -18,6 +18,7 @@ export class EventRegisterComponent implements OnInit {
   registrationForm: FormGroup;
   isRegistrationFormSubmitted = false;
   isRegistrationSuccessful = false;
+  isRegistrationFailed = false;
 
   constructor(
     private _ds: DataService,
@@ -31,6 +32,7 @@ export class EventRegisterComponent implements OnInit {
     this.isConfirmRegistrationInfoActive = false;
     this.isRegistrationFormSubmitted = false;
     this.isRegistrationSuccessful = false;
+    this.isRegistrationFailed = false;
     this.eventId = this.data.eventId;
     this.sessions = this.data.sessions;
 
@@ -51,6 +53,10 @@ export class EventRegisterComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  refreshPage() {
+    location.reload();
   }
 
   back() {
@@ -87,6 +93,7 @@ export class EventRegisterComponent implements OnInit {
           ).catch(
             (error) => {
               console.log(error);
+              this.isRegistrationFailed = true;
             }
           );
         }
