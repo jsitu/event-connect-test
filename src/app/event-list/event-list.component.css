@@ -120,3 +120,17 @@ md-card-actions div.tooltip-host a i {
     font-size: 1em;
     color: #6d7074;
 }
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 1023px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    section#event-list-container {
+        flex-direction: column;
+    }
+
+    md-card.event-card {
+        max-width: 100%;
+    }
+}

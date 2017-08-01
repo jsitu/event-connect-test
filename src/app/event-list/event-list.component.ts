@@ -30,7 +30,6 @@ export class EventListComponent implements OnInit {
     this._route.data.subscribe(
       (data: Data) => {
         if (data && data['events']) {
-          console.log(data['events'].json());
           this.events = data['events'].json();
         }
       },
