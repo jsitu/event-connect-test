@@ -27,9 +27,8 @@ export class EventRegisterComponent implements OnInit {
     public dialogRef: MdDialogRef<EventRegisterComponent>,
     public eventService: EventService,
     @Inject(MD_DIALOG_DATA) public data: any
-  ) {}
+  ) {
 
-  ngOnInit() {
     this.isConfirmRegistrationInfoActive = false;
     this.isRegistrationFormSubmitted = false;
     this.isRegistrationSuccessful = false;
@@ -41,7 +40,15 @@ export class EventRegisterComponent implements OnInit {
       this.sessions.forEach(session => {
         session.isSelected = false;
       });
-    };
+    } else {
+      this.isConfirmRegistrationInfoActive = true;
+    }
+  }
+
+  ngOnInit() {
+    if (this.isConfirmRegistrationInfoActive) {
+      this.attendeeFirstName.nativeElement.focus();
+    }
 
     this.registrationForm = this._formBuilder.group({
       firstName: ['', Validators.required],

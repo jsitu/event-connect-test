@@ -53,11 +53,16 @@ export class EventDetailComponent implements OnInit {
     this._router.navigate(['/events']);
   }
 
-  openEventRegisterDialog(sessions: any) {
+  openEventRegisterDialog(event: any) {
+    let sessions: any;
+    if (this.eventService.selectedEvent.sessions__r && this.eventService.selectedEvent.sessions__r.records) {
+      sessions = this.eventService.selectedEvent.sessions__r.records;
+    }
+
     const dialogRef = this.eventRegisterDialog.open(EventRegisterComponent, {
       data: {
         eventId: this.eventService.selectedEvent.id,
-        sessions: sessions
+        sessions: sessions ? sessions : []
       }
     });
   }

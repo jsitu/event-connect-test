@@ -22,7 +22,7 @@
           <button 
             md-raised-button 
             class="event-register-button" 
-            (click)="openEventRegisterDialog(eventService.selectedEvent?.sessions__r.records)"
+            (click)="openEventRegisterDialog(eventService.selectedEvent)"
             [disabled]="!eventService.isEventOpen(eventService.selectedEvent) || eventService.selectedEvent?.remaining_seats__c == 0 || eventService.selectedEvent?.remaining_seats__c < 0">Register</button>
         </aside>
       </section>
@@ -41,7 +41,7 @@
                 <th>Availability<th>
                 <th></th>
               </tr>
-              <tr *ngFor="let session of eventService.selectedEvent?.sessions__r.records | orderBy: 'Start__c'">
+              <tr *ngFor="let session of eventService.selectedEvent?.sessions__r?.records | orderBy: 'Start__c'">
                 <td>{{session.Start__c | DateTime: 'time'}} - {{session.End__c | DateTime: 'time'}}</td>
                 <td>{{session.Title__c}}</td>
                 <td>
