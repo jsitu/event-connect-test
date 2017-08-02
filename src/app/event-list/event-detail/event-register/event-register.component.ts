@@ -73,7 +73,7 @@ export class EventRegisterComponent implements OnInit {
 
   confirmRegistrationInfo() {
     this.isConfirmRegistrationInfoActive = true;
-    this.attendeeFirstName.nativeElement.focus();
+    // this.attendeeFirstName.nativeElement.focus();
   }
 
   onRegistrationFormSubmit() {

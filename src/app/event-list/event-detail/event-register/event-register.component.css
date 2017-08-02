@@ -37,6 +37,7 @@ div.dialog-content {
     flex-direction: column;
     min-width: 50vw;
     min-height: 50vh;
+    -webkit-overflow-scrolling: auto;
 }
 
 div.dialog-content h4 {

@@ -1,8 +1,8 @@
 <section class="dialog-container">
-  <div *ngIf="!isConfirmRegistrationInfoActive">
+  <div *ngIf="!isConfirmRegistrationInfoActive && !isRegistrationFormSubmitted">
     <div md-dialog-title class="dialog-title">
       <span>Register</span>
-      <a (click)="closeDialog()"><i class="material-icons">clear</i></a>
+      <a (click)="closeDialog()"><i class="material-icons" autofocus>clear</i></a>
     </div>
     <div md-dialog-content class="dialog-content">
       <div *ngFor="let session of sessions | orderBy: 'Start__c'" class="session-container" [ngClass]="{'selected': session.isSelected}">
@@ -34,7 +34,7 @@
     </div>
   </div>
   
-  <div [ngClass]="{'hidden': !isConfirmRegistrationInfoActive}">
+  <div *ngIf="isConfirmRegistrationInfoActive && !isRegistrationFormSubmitted">
     <div md-dialog-title class="dialog-title">
       <a (click)="back()" class="back-button" *ngIf="!isRegistrationFormSubmitted && sessions.length > 0">
         <i class="material-icons">arrow_back</i>
@@ -116,12 +116,12 @@
     <div *ngIf="isRegistrationSuccessful && !isRegistrationFailed">
       <h4><i class="material-icons">check_circle</i><span>Registration Success!</span></h4>
       <p>Thank you for registering! A confirmation email is sent to {{registrationForm.value.email}}, please check your mailbox for event details.</p>
-      <button md-raised-button class="checkout-button complete-registration-button" (click)="refreshPage()">Done</button>
+      <button md-raised-button class="checkout-button" (click)="refreshPage()">Done</button>
     </div>
     <div *ngIf="!isRegistrationSuccessful && isRegistrationFailed">
       <h4 class="fail-message"><i class="material-icons">error</i><span>Registration Fail</span></h4>
       <p>Uh oh! Something went wrong, please refresh the page and try again, sorry for the inconvenience.</p>
-      <button md-raised-button class="checkout-button complete-registration-button refresh-button" (click)="refreshPage()">Refresh</button>
+      <button md-raised-button class="checkout-button refresh-button" (click)="refreshPage()">Refresh</button>
     </div>
   </div>
 </section>
