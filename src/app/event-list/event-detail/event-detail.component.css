@@ -12,14 +12,16 @@ section#event-detail-container {
     overflow: hidden;
 }
 
-section#event-detail-container a#back-link {
+a#back-link {
     display: flex;
-    justify-content: center;
     align-items: center;
     align-self: flex-start;
     max-height: 25px;
     cursor: pointer;
-    margin-bottom: 1em;
+    margin: 0;
+    padding: 1em;
+    justify-content: left;
+    font-weight: 600;
 }
 
 md-card.event-detail-card {
@@ -273,8 +275,20 @@ button.event-register-button-fixed {
         margin-bottom: 0;
     }
 
-    section#event-detail-container a#back-link {
-        display: none;
+    a#back-link {
+        position: fixed;
+        width: auto;
+        background: rgba(238,238,238,0.9);
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: .8em;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        z-index: 1;
     }
 
     md-card.event-detail-card section.event-header {
@@ -395,7 +409,7 @@ button.event-register-button-fixed {
         left: 0;
         font-size: 1em;
         font-weight: 400;
-        padding: .3em;
+        padding: .4em;
         width: 100%;
         background: #01ab45;
         color: #fff;

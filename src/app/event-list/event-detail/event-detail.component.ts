@@ -40,25 +40,7 @@ export class EventDetailComponent implements OnInit {
           (data) => {
             if (data.json().length) {
               this.eventService.selectedEvent = data.json()[0];
-              this._map.findFromAddress(
-                this.eventService.selectedEvent.address__c,
-                this.eventService.selectedEvent.city__c,
-                this.eventService.selectedEvent.state__c,
-                this.eventService.selectedEvent.zip__c
-              ).subscribe(response => {
-                    if (response.status === 'OK') {
-                        this.lat = response.results[0].geometry.location.lat;
-                        this.lng = response.results[0].geometry.location.lng;
-                        this.isMapActive = true;
-                    } else if (response.status === 'ZERO_RESULTS') {
-                        console.log('geocodingAPIService', 'ZERO_RESULTS', response.status);
-                        this.isMapActive = false;
-                    } else {
-                        console.log('geocodingAPIService', 'Other error', response.status);
-                        this.isMapActive = false;
-                    }
-                }
-              );
+              this.getEventLocationMap();
             }
           }
         ).catch(
@@ -66,6 +48,8 @@ export class EventDetailComponent implements OnInit {
             console.log(error);
           }
         );
+      } else {
+        this.getEventLocationMap();
       }
     }
   }
@@ -90,6 +74,28 @@ export class EventDetailComponent implements OnInit {
         sessions: sessions ? sessions : []
       }
     });
+  }
+
+  getEventLocationMap() {
+    this._map.findFromAddress(
+      this.eventService.selectedEvent.address__c,
+      this.eventService.selectedEvent.city__c,
+      this.eventService.selectedEvent.state__c,
+      this.eventService.selectedEvent.zip__c
+    ).subscribe(response => {
+          if (response.status === 'OK') {
+              this.lat = response.results[0].geometry.location.lat;
+              this.lng = response.results[0].geometry.location.lng;
+              this.isMapActive = true;
+          } else if (response.status === 'ZERO_RESULTS') {
+              console.log('geocodingAPIService', 'ZERO_RESULTS', response.status);
+              this.isMapActive = false;
+          } else {
+              console.log('geocodingAPIService', 'Other error', response.status);
+              this.isMapActive = false;
+          }
+      }
+    );
   }
 
 }

@@ -20,12 +20,13 @@
         <div class="session-register-check">
           <span *ngIf="eventService.isEventSessionSoldOut(session)">Sold Out</span>
           <span *ngIf="eventService.isEventSessionClosed(session)">Closed</span>
-          <md-checkbox 
-            class="select-session" 
-            color="primary"
+          <input 
+            type="checkbox"
+            class="session-select-checkbox"
+            id="{{session.Id}}" 
             [(ngModel)]="session.isSelected"
-            *ngIf="eventService.isEventSessionOpen(session) && !eventService.isEventSessionSoldOut(session)">
-          </md-checkbox>
+            [disabled]="!eventService.isEventSessionOpen(session)">
+          <label for="{{session.Id}}" class="session-select-checkbox-label"></label>
         </div>
       </div>
     </div>

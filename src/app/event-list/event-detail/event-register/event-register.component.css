@@ -46,6 +46,7 @@ div.dialog-content h4 {
 }
 
 div.session-container {
+    position: relative;
     display: flex;
     border: 1px solid #ccc;
     border-left: .5em solid #bbb;
@@ -79,8 +80,21 @@ div.session-container div.session-register-check {
     margin-right: .5em;
 }
 
-div.session-container div.session-register-check md-checkbox {
-    transform: scale(1.2);
+div.session-container div.session-register-check input.session-select-checkbox {
+    display: none;
+}
+
+div.session-container div.session-register-check label.session-select-checkbox-label {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 div.dialog-actions button.checkout-button {
@@ -191,6 +205,10 @@ div.registration-submit-loading div button.refresh-button {
         font-size: .9em;
     }
 
+    div.dialog-title {
+        margin-top: 1.5em;
+    }
+
     div.dialog-title span {
         font-size: .85em;
     }
@@ -199,9 +217,17 @@ div.registration-submit-loading div button.refresh-button {
         font-size: .9em;
     }
 
+    div.dialog-content.mat-dialog-content {
+        padding-bottom: 3em;
+    }
+
+    div.dialog-content div.session-container:last-child {
+        margin-bottom: 3em;
+    }
+
     div.dialog-actions button.checkout-button {
         width: 100%;
-        padding: .3em;
+        padding: .4em;
         font-size: 1em;
     }
 
