@@ -18,6 +18,29 @@ const getUsersRouter = (org: any) => {
         });
     });
 
+    usersRouter.put('/:id', function(req, res) {
+        const id = req.params.id;
+        const user = req.body;
+
+        // tslint:disable-next-line:quotemark
+        const q = "SELECT Id, Active__c FROM Attendee__c WHERE Id = '" + id + "' LIMIT 1";
+
+        org.query({query: q}, function (err, resp) {
+            if (err) {
+                console.log('Error: ' + err.message);
+            };
+            if (!err && resp.records) {
+                // tslint:disable-next-line:prefer-const
+                let attendee = resp.records[0];
+                attendee.set('Active__c', user.Active__c);
+                // tslint:disable-next-line:no-shadowed-variable
+                org.update({ sobject: attendee }, function(err, resp){
+                    if (!err) { console.log('Attendee Active Updated.'); }
+                });
+            };
+        });
+    });
+
     usersRouter.post('/event', function(req, res) {
         const eventAttendee = req.body;
         const eaRelationship = nforce.createSObject('EventAttendee__c', eventAttendee);

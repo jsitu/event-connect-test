@@ -18,14 +18,18 @@ export class DataService {
 
   createAttendee(attendee: any): Promise<any> {
     return this._http.post('/api/users', attendee).toPromise();
-  }
+  };
+
+  updateAttendeeById(attendee: any): Promise<any> {
+    return this._http.put(`/api/users/${attendee.Id}`, attendee).toPromise();
+  };
 
   createEventAttendeeAssociation(eventAttendee: any): Promise<any> {
     return this._http.post('/api/users/event', eventAttendee).toPromise();
-  }
+  };
 
   createSessionAttendeeAssociation(sessionAttendee: any): Promise<any> {
     return this._http.post('/api/users/session', sessionAttendee).toPromise();
-  }
+  };
 
 }

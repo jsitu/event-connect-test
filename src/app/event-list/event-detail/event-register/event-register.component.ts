@@ -115,6 +115,20 @@ export class EventRegisterComponent implements OnInit {
 
                       if (selectedSessionRegistationSuccessCount === selectedSessionCount) {
                         this.isRegistrationSuccessful = true;
+                        // Update addendee active property here
+                        this._ds.updateAttendeeById({
+                          Id: attendeeId,
+                          Active__c: true
+                        }).then(
+                          // tslint:disable-next-line:no-shadowed-variable
+                          (res) => {
+                            console.log('Attendee Updated.');
+                          }
+                        ).catch(
+                          (err) => {
+                            console.log(err);
+                          }
+                        );
                       }
                     }
                   ).catch(
@@ -126,6 +140,20 @@ export class EventRegisterComponent implements OnInit {
                 });
               } else {
                 this.isRegistrationSuccessful = true;
+                // Update addendee active property here
+                this._ds.updateAttendeeById({
+                  Id: attendeeId,
+                  Active__c: true
+                }).then(
+                  // tslint:disable-next-line:no-shadowed-variable
+                  (res) => {
+                    console.log('Attendee Updated.');
+                  }
+                ).catch(
+                  (err) => {
+                    console.log(err);
+                  }
+                );
               }
             }
           ).catch(
