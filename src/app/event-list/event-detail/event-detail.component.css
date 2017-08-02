@@ -240,6 +240,26 @@ md-card.event-detail-card section.event-content aside div.event-location p span 
     margin-right: 5px;
 }
 
+md-card.event-detail-card section.event-location-map {
+    display: block;
+    width: 100%;
+    clear: both;
+    margin: 0;
+    padding: 0;
+}
+
+md-card.event-detail-card section.event-location-map agm-map {
+    display: block;
+    height: 300px;
+    margin: 0;
+    margin-top: 1em;
+    padding: 0;
+}
+
+button.event-register-button-fixed {
+    display: none;
+}
+
 @media only screen 
   and (min-device-width: 320px) 
   and (max-device-width: 1023px)
@@ -249,19 +269,12 @@ md-card.event-detail-card section.event-content aside div.event-location p span 
         width: 100%;
     }
 
+    md-card.event-detail-card md-card-content {
+        margin-bottom: 0;
+    }
+
     section#event-detail-container a#back-link {
-        position: absolute;
-        width: 100%;
-        background: rgba(255,255,255,0.8);
-        top: 0;
-        left: 0;
-        margin: 0;
-        z-index: 1;
-        padding: .5em;
-        text-align: left;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
+        display: none;
     }
 
     md-card.event-detail-card section.event-header {
@@ -297,10 +310,7 @@ md-card.event-detail-card section.event-content aside div.event-location p span 
     }
 
     md-card.event-detail-card section.event-header aside button.event-register-button {
-        font-size: 1.1em;
-        padding: .3em;
-        width: 100%;
-        margin-top: 1em;
+        display: none;
     }
 
     md-card.event-detail-card section.event-content {
@@ -376,5 +386,20 @@ md-card.event-detail-card section.event-content aside div.event-location p span 
         color: #9E9E9E;
         font-size: .9em;
         font-weight: bold;
+    }
+    
+    button.event-register-button-fixed {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        font-size: 1em;
+        font-weight: 400;
+        padding: .3em;
+        width: 100%;
+        background: #01ab45;
+        color: #fff;
+        outline: none;
+        text-transform: uppercase;
     }
 }

@@ -101,6 +101,16 @@
           </div>
         </aside>
       </section>
+      <section class="event-location-map">
+        <agm-map *ngIf="isMapActive" [latitude]="lat" [longitude]="lng" [zoom]="10">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+      </section>
     </md-card-content>
   </md-card>
 </section>
+<button 
+  md-raised-button 
+  class="event-register-button-fixed" 
+  (click)="openEventRegisterDialog(eventService.selectedEvent)"
+  [disabled]="!eventService.isEventOpen(eventService.selectedEvent) || eventService.selectedEvent?.remaining_seats__c == 0 || eventService.selectedEvent?.remaining_seats__c < 0">Register</button>

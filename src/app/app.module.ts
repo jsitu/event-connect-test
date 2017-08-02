@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule, MdTooltipModule, MdDialogModule } from '@angular/material';
 import { AppRouteModule } from './app.route';
+import { AgmCoreModule } from '@agm/core';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { EventRegisterComponent } from './event-list/event-detail/event-register
 import { DataService } from './services/data.service';
 import { LookupService } from './services/lookup.service';
 import { EventService } from './event-list/event.service';
+import { MapService } from './services/map.service';
 
 import { EventsResolver } from './resolvers/events.resolver';
 
@@ -39,10 +41,13 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     BrowserAnimationsModule,
     MaterialModule,
     MdTooltipModule,
-    MdDialogModule
+    MdDialogModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAWCZ6J10f19dknhZksZPLYGzoGT1pwSbU'
+    })
   ],
   entryComponents: [EventRegisterComponent],
-  providers: [DataService, LookupService, EventsResolver, EventService],
+  providers: [DataService, LookupService, EventsResolver, EventService, MapService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

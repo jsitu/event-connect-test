@@ -4,6 +4,7 @@ import { MdDialog } from '@angular/material';
 import { DataService } from './../../services/data.service';
 import { EventService } from './../event.service';
 import { LookupService } from './../../services/lookup.service';
+import { MapService } from './../../services/map.service';
 import { eventEnterLeaveAnimationTrigger } from '../../animations/event.animations';
 import { EventRegisterComponent } from './event-register/event-register.component';
 
@@ -16,9 +17,14 @@ import { EventRegisterComponent } from './event-register/event-register.componen
 export class EventDetailComponent implements OnInit {
 
   selectedEventState = 'in';
+  isMapActive = false;
+
+  lat: number;
+  lng: number;
 
   constructor(
     private _ds: DataService,
+    private _map: MapService,
     private _route: ActivatedRoute,
     private _router: Router,
     public eventRegisterDialog: MdDialog,
@@ -34,6 +40,25 @@ export class EventDetailComponent implements OnInit {
           (data) => {
             if (data.json().length) {
               this.eventService.selectedEvent = data.json()[0];
+              this._map.findFromAddress(
+                this.eventService.selectedEvent.address__c,
+                this.eventService.selectedEvent.city__c,
+                this.eventService.selectedEvent.state__c,
+                this.eventService.selectedEvent.zip__c
+              ).subscribe(response => {
+                    if (response.status === 'OK') {
+                        this.lat = response.results[0].geometry.location.lat;
+                        this.lng = response.results[0].geometry.location.lng;
+                        this.isMapActive = true;
+                    } else if (response.status === 'ZERO_RESULTS') {
+                        console.log('geocodingAPIService', 'ZERO_RESULTS', response.status);
+                        this.isMapActive = false;
+                    } else {
+                        console.log('geocodingAPIService', 'Other error', response.status);
+                        this.isMapActive = false;
+                    }
+                }
+              );
             }
           }
         ).catch(
