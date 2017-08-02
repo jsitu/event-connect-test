@@ -1,5 +1,5 @@
 <section class="dialog-container">
-  <div *ngIf="!isConfirmRegistrationInfoActive && !isRegistrationFormSubmitted">
+  <div *ngIf="!isConfirmRegistrationInfoActive" [ngClass]="{'hidden': isRegistrationFormSubmitted}">
     <div md-dialog-title class="dialog-title">
       <span>Register</span>
       <a (click)="closeDialog()"><i class="material-icons" autofocus>clear</i></a>
@@ -34,7 +34,7 @@
     </div>
   </div>
   
-  <div *ngIf="isConfirmRegistrationInfoActive && !isRegistrationFormSubmitted">
+  <div *ngIf="isConfirmRegistrationInfoActive" [ngClass]="{'hidden': isRegistrationFormSubmitted}">
     <div md-dialog-title class="dialog-title">
       <a (click)="back()" class="back-button" *ngIf="!isRegistrationFormSubmitted && sessions.length > 0">
         <i class="material-icons">arrow_back</i>
