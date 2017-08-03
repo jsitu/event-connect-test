@@ -56,7 +56,8 @@
             placeholder="First Name *"
             formControlName="firstName"
             #attendeeFirstName
-            ngModel>
+            ngModel
+            autofocus>
         </md-input-container>
         <div class="validation-errors" *ngIf="registrationForm.controls.firstName.errors?.required && registrationForm.controls.firstName.touched">
           <md-error>First name is <strong>required</strong></md-error>
