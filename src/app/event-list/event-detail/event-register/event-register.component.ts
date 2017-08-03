@@ -46,10 +46,6 @@ export class EventRegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    // if (this.isConfirmRegistrationInfoActive) {
-    //   this.attendeeFirstName.nativeElement.focus();
-    // }
-
     this.registrationForm = this._formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -73,7 +69,6 @@ export class EventRegisterComponent implements OnInit {
 
   confirmRegistrationInfo() {
     this.isConfirmRegistrationInfoActive = true;
-    // this.attendeeFirstName.nativeElement.focus();
   }
 
   onRegistrationFormSubmit() {

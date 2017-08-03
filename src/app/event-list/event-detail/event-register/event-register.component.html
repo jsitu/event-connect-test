@@ -50,7 +50,7 @@
       (ngSubmit)="onRegistrationFormSubmit()"
       novalidate>
     <div md-dialog-content class="dialog-content">
-        <md-input-container class="form-full-width">
+        <md-input-container class="form-full-width" floatPlaceholder="never">
           <input 
             mdInput 
             placeholder="First Name *"
@@ -62,7 +62,7 @@
           <md-error>First name is <strong>required</strong></md-error>
         </div>
 
-        <md-input-container class="form-full-width">
+        <md-input-container class="form-full-width" floatPlaceholder="never">
         <input 
           mdInput 
           placeholder="Last Name *"
@@ -73,7 +73,7 @@
           <md-error>Last name is <strong>required</strong></md-error>
         </div>
 
-        <md-input-container class="form-full-width">
+        <md-input-container class="form-full-width" floatPlaceholder="never">
           <input 
             mdInput 
             placeholder="Phone *"
@@ -84,7 +84,7 @@
           <md-error>Phone is <strong>required</strong></md-error>
         </div>
         
-        <md-input-container class="form-full-width">
+        <md-input-container class="form-full-width" floatPlaceholder="never">
           <input 
             mdInput 
             placeholder="Email *"
@@ -98,7 +98,7 @@
           <md-error *ngIf="!registrationForm.controls.email.valid && registrationForm.controls.email.touched">Please enter a valid email address</md-error>
         </div>
 
-        <md-input-container class="form-full-width">
+        <md-input-container class="form-full-width" floatPlaceholder="never">
           <input 
             mdInput 
             placeholder="Company"
