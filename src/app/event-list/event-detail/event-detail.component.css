@@ -97,6 +97,7 @@ md-card.event-detail-card section.event-header aside p.event-status.isClosed {
 
 md-card.event-detail-card section.event-header aside p.event-remaining-seats {
     font-size: 1.1em;
+    margin-bottom: 0;
 }
 
 md-card.event-detail-card section.event-header aside button.event-register-button {
@@ -303,7 +304,7 @@ button.event-register-button-fixed {
     md-card.event-detail-card section.event-header aside {
         align-items: center;
         padding: 1em 0;
-        padding-bottom: 0;
+        padding-bottom: 1.5em;
         width: 100%;
     }
 
@@ -415,5 +416,12 @@ button.event-register-button-fixed {
         color: #fff;
         outline: none;
         text-transform: uppercase;
+    }
+
+    button.event-register-button-fixed[disabled] {
+        background: #9E9E9E;
+        cursor: not-allowed;
+        color: #fff;
+        opacity: .8;
     }
 }

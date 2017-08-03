@@ -1,4 +1,16 @@
+md-spinner {
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+}
+
 section#event-list-container {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     width: 100%;;

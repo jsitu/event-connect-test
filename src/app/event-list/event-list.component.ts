@@ -14,7 +14,8 @@ import { eventEnterLeaveAnimationTrigger } from '../animations/event.animations'
 export class EventListComponent implements OnInit {
 
   events: any[];
-  allEventState = 'in';
+  allEventState = 'out';
+  allEventLoadingState = 'in';
 
   constructor(
     private _ds: DataService,
@@ -22,15 +23,18 @@ export class EventListComponent implements OnInit {
     private _router: Router,
     public eventService: EventService,
     public lookupService: LookupService
-  ) {
-    this.allEventState = 'in';
-  }
+  ) {}
 
   ngOnInit() {
+    this.allEventState = 'out';
+    this.allEventLoadingState = 'in';
+
     this._route.data.subscribe(
       (data: Data) => {
         if (data && data['events']) {
           this.events = data['events'].json();
+          this.allEventState = 'in';
+          this.allEventLoadingState = 'out';
         }
       },
       (error) => {
