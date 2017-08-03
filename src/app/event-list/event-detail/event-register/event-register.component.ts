@@ -92,13 +92,13 @@ export class EventRegisterComponent implements OnInit {
             // tslint:disable-next-line:no-shadowed-variable
             (res) => {
               console.log('Event Registration Success!');
-              const selectedSessionCount = _.filter(this.sessions, (session) => {
+              const selectedSessions = _.filter(this.sessions, (session) => {
                 return session.isSelected === true;
-              }).length;
+              });
 
               let selectedSessionRegistationSuccessCount = 0;
-              if (selectedSessionCount > 0) {
-                this.sessions.forEach(session => {
+              if (selectedSessions.length > 0) {
+                selectedSessions.forEach(session => {
                   this._ds.createSessionAttendeeAssociation({
                     Attendee__c: attendeeId,
                     Session__c: session.Id
@@ -108,7 +108,7 @@ export class EventRegisterComponent implements OnInit {
                       console.log('Session Registration Success!');
                       selectedSessionRegistationSuccessCount++;
 
-                      if (selectedSessionRegistationSuccessCount === selectedSessionCount) {
+                      if (selectedSessionRegistationSuccessCount === selectedSessions.length) {
                         this.isRegistrationSuccessful = true;
                         // Update addendee active property here
                         this._ds.updateAttendeeById({
