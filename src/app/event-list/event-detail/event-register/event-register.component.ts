@@ -91,9 +91,81 @@ export class EventRegisterComponent implements OnInit {
 
     this._ds.checkAttendeeUniqueness(attendee).then(
       (res) => {
-        const isUserUnique = res.json().isUserUnique;
-        const userId = res.json().user.id;
-        if (isUserUnique) {
+        const userId = res.json().id;
+        if (userId !== null) {
+          this._ds.createEventAttendeeAssociation({
+            Attendee__c: userId,
+            Event__c: this.eventId
+          }).then(
+            // tslint:disable-next-line:no-shadowed-variable
+            (res) => {
+              console.log('Event Registration Success!');
+              let selectedSessions = _.filter(this.sessions, (session) => {
+                return session.isSelected === true;
+              });
+
+              let selectedSessionRegistationSuccessCount = 0;
+              if (selectedSessions.length > 0) {
+                mailBody = mailBody.concat('<ul>');
+                selectedSessions = _.sortBy(selectedSessions, ['Start__c']);
+                selectedSessions.forEach(session => {
+                  this._ds.createSessionAttendeeAssociation({
+                    Attendee__c: userId,
+                    Session__c: session.Id
+                  }).then(
+                    // tslint:disable-next-line:no-shadowed-variable
+                    (res) => {
+                      console.log('Session Registration Success!');
+                      selectedSessionRegistationSuccessCount++;
+
+                      // tslint:disable-next-line:max-line-length
+                      mailBody = mailBody.concat('<li>' + session.Title__c + ' - ' + moment(session.Start__c).format('ddd, MMM D h:mm A') + '</li>');
+
+                      if (selectedSessionRegistationSuccessCount === selectedSessions.length) {
+                        mailBody = mailBody.concat('</ul>');
+
+                        this.isRegistrationSuccessful = true;
+                        this._ds.createMailer({
+                          Recipient_Name__c: attendee.Name,
+                          Recipient_Email__c: attendee.Email__c,
+                          Mail_Body__c: mailBody
+                        }).then(
+                          // tslint:disable-next-line:no-shadowed-variable
+                          (res) => console.log(res)
+                        ).catch(
+                          (err) => console.log(err)
+                        );
+                      }
+                    }
+                  ).catch(
+                    (error) => {
+                      this.isRegistrationFailed = true;
+                      console.log(error);
+                    }
+                  );
+                });
+              } else {
+                this.isRegistrationSuccessful = true;
+
+                this._ds.createMailer({
+                  Recipient_Name__c: attendee.Name,
+                  Recipient_Email__c: attendee.Email__c,
+                  Mail_Body__c: mailBody
+                }).then(
+                  // tslint:disable-next-line:no-shadowed-variable
+                  (res) => console.log(res)
+                ).catch(
+                  (err) => console.log(err)
+                );
+              }
+            }
+          ).catch(
+            (error) => {
+              console.log(error);
+              this.isRegistrationFailed = true;
+            }
+          );
+        } else {
           this._ds.createAttendee(attendee).then(
             // tslint:disable-next-line:no-shadowed-variable
             (res) => {
@@ -176,79 +248,6 @@ export class EventRegisterComponent implements OnInit {
           ).catch(
             (err) => {
               console.log(err);
-            }
-          );
-        } else {
-          this._ds.createEventAttendeeAssociation({
-            Attendee__c: userId,
-            Event__c: this.eventId
-          }).then(
-            // tslint:disable-next-line:no-shadowed-variable
-            (res) => {
-              console.log('Event Registration Success!');
-              let selectedSessions = _.filter(this.sessions, (session) => {
-                return session.isSelected === true;
-              });
-
-              let selectedSessionRegistationSuccessCount = 0;
-              if (selectedSessions.length > 0) {
-                mailBody = mailBody.concat('<ul>');
-                selectedSessions = _.sortBy(selectedSessions, ['Start__c']);
-                selectedSessions.forEach(session => {
-                  this._ds.createSessionAttendeeAssociation({
-                    Attendee__c: userId,
-                    Session__c: session.Id
-                  }).then(
-                    // tslint:disable-next-line:no-shadowed-variable
-                    (res) => {
-                      console.log('Session Registration Success!');
-                      selectedSessionRegistationSuccessCount++;
-
-                      // tslint:disable-next-line:max-line-length
-                      mailBody = mailBody.concat('<li>' + session.Title__c + ' - ' + moment(session.Start__c).format('ddd, MMM D h:mm A') + '</li>');
-
-                      if (selectedSessionRegistationSuccessCount === selectedSessions.length) {
-                        mailBody = mailBody.concat('</ul>');
-
-                        this.isRegistrationSuccessful = true;
-                        this._ds.createMailer({
-                          Recipient_Name__c: attendee.Name,
-                          Recipient_Email__c: attendee.Email__c,
-                          Mail_Body__c: mailBody
-                        }).then(
-                          // tslint:disable-next-line:no-shadowed-variable
-                          (res) => console.log(res)
-                        ).catch(
-                          (err) => console.log(err)
-                        );
-                      }
-                    }
-                  ).catch(
-                    (error) => {
-                      this.isRegistrationFailed = true;
-                      console.log(error);
-                    }
-                  );
-                });
-              } else {
-                this.isRegistrationSuccessful = true;
-
-                this._ds.createMailer({
-                  Recipient_Name__c: attendee.Name,
-                  Recipient_Email__c: attendee.Email__c,
-                  Mail_Body__c: mailBody
-                }).then(
-                  // tslint:disable-next-line:no-shadowed-variable
-                  (res) => console.log(res)
-                ).catch(
-                  (err) => console.log(err)
-                );
-              }
-            }
-          ).catch(
-            (error) => {
-              console.log(error);
-              this.isRegistrationFailed = true;
             }
           );
         }
