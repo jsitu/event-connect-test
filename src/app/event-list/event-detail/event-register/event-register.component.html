@@ -79,10 +79,14 @@
             mdInput 
             placeholder="Phone *"
             formControlName="phone"
+            [textMask]="{mask: helperService.phoneNumMask}"
             ngModel>
         </md-input-container>
         <div class="validation-errors" *ngIf="registrationForm.controls.phone.errors?.required && registrationForm.controls.phone.touched">
           <md-error>Phone is <strong>required</strong></md-error>
+        </div>
+        <div class="validation-errors" *ngIf="registrationForm.controls.phone.errors?.phoneNumIsInvalid && registrationForm.controls.phone.touched">
+          <md-error class="authError">Please enter a valid phone number</md-error>
         </div>
         
         <md-input-container class="form-full-width" floatPlaceholder="never">

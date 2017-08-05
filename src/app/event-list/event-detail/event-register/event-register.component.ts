@@ -3,6 +3,7 @@ import { DataService } from './../../../services/data.service';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { EventService } from './../../event.service';
+import { HelperService } from './../../../services/helper.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
@@ -29,6 +30,7 @@ export class EventRegisterComponent implements OnInit {
     private _formBuilder: FormBuilder,
     public dialogRef: MdDialogRef<EventRegisterComponent>,
     public eventService: EventService,
+    public helperService: HelperService,
     @Inject(MD_DIALOG_DATA) public data: any
   ) {
 
@@ -54,7 +56,7 @@ export class EventRegisterComponent implements OnInit {
     this.registrationForm = this._formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, this.helperService.validatePhone.bind(this)]],
       email: ['', [Validators.required, Validators.email]],
       company: ''
     });
