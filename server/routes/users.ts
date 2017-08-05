@@ -4,6 +4,30 @@ import * as nforce from 'nforce';
 const usersRouter: Router = Router();
 
 const getUsersRouter = (org: any) => {
+    usersRouter.get('/', function(req, res) {
+        const query = req.query;
+        // tslint:disable-next-line:quotemark
+        const q = "SELECT Id FROM Attendee__c WHERE Name = '" + query.name + "' AND Email__c = '" + query.email + "'";
+
+        org.query({ query: q }, function(err, resp){
+
+            if (!err && resp.records) {
+                console.log('User exists');
+                res.send({
+                    isUserUnique: false,
+                    user: resp.records[0]
+                });
+
+            } else {
+                console.log('User not exist');
+                res.send({
+                    isUserUnique: true,
+                    user: null
+                });
+            }
+        });
+    });
+
     usersRouter.post('/', function(req, res) {
         const user = req.body;
         const attendee = nforce.createSObject('Attendee__c', user);

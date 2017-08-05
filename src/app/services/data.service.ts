@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -23,6 +23,16 @@ export class DataService {
   updateAttendeeById(attendee: any): Promise<any> {
     return this._http.put(`/api/users/${attendee.Id}`, attendee).toPromise();
   };
+
+  checkAttendeeUniqueness(attendee: any): Promise<any> {
+    const params: URLSearchParams = new URLSearchParams();
+    params.set('name', attendee.Name);
+    params.set('email', attendee.Email__c);
+    const requestOptions = new RequestOptions();
+    requestOptions.params = params;
+
+    return this._http.get('/api/users', requestOptions).toPromise();
+  }
 
   createEventAttendeeAssociation(eventAttendee: any): Promise<any> {
     return this._http.post('/api/users/event', eventAttendee).toPromise();
