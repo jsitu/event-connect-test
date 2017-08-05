@@ -71,6 +71,8 @@ export class EventDetailComponent implements OnInit {
     const dialogRef = this.eventRegisterDialog.open(EventRegisterComponent, {
       data: {
         eventId: this.eventService.selectedEvent.id,
+        eventTitle: this.eventService.selectedEvent.title__c,
+        eventStartDate: this.eventService.selectedEvent.start__c,
         sessions: sessions ? sessions : []
       }
     });

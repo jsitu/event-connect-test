@@ -32,4 +32,8 @@ export class DataService {
     return this._http.post('/api/users/session', sessionAttendee).toPromise();
   };
 
+  createMailer(mailer: any): Promise<any> {
+    return this._http.post('/api/mailers', mailer).toPromise();
+  }
+
 }

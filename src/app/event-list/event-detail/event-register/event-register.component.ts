@@ -4,6 +4,7 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { EventService } from './../../event.service';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-event-register',
@@ -14,6 +15,8 @@ export class EventRegisterComponent implements OnInit {
 
   @ViewChild('attendeeFirstName') attendeeFirstName: ElementRef;
   eventId: string;
+  eventTitle: string;
+  eventStartDate: string;
   sessions: any[];
   isConfirmRegistrationInfoActive = false;
   registrationForm: FormGroup;
@@ -34,6 +37,8 @@ export class EventRegisterComponent implements OnInit {
     this.isRegistrationSuccessful = false;
     this.isRegistrationFailed = false;
     this.eventId = this.data.eventId;
+    this.eventTitle = this.data.eventTitle;
+    this.eventStartDate = this.data.eventStartDate;
     this.sessions = this.data.sessions;
 
     if (this.sessions.length) {
@@ -81,6 +86,9 @@ export class EventRegisterComponent implements OnInit {
       Company__c: this.registrationForm.value.company
     };
 
+    const EventStartDate = moment(this.eventStartDate).format('ddd, MMM D h:mm A');
+    let mailBody = '<p><strong>' + this.eventTitle + '</strong> - ' + EventStartDate + '</p>';
+
     this._ds.createAttendee(attendee).then(
       (res) => {
         if (res.json().id) {
@@ -92,12 +100,14 @@ export class EventRegisterComponent implements OnInit {
             // tslint:disable-next-line:no-shadowed-variable
             (res) => {
               console.log('Event Registration Success!');
-              const selectedSessions = _.filter(this.sessions, (session) => {
+              let selectedSessions = _.filter(this.sessions, (session) => {
                 return session.isSelected === true;
               });
 
               let selectedSessionRegistationSuccessCount = 0;
               if (selectedSessions.length > 0) {
+                mailBody = mailBody.concat('<ul>');
+                selectedSessions = _.sortBy(selectedSessions, ['Start__c']);
                 selectedSessions.forEach(session => {
                   this._ds.createSessionAttendeeAssociation({
                     Attendee__c: attendeeId,
@@ -108,21 +118,22 @@ export class EventRegisterComponent implements OnInit {
                       console.log('Session Registration Success!');
                       selectedSessionRegistationSuccessCount++;
 
+                      // tslint:disable-next-line:max-line-length
+                      mailBody = mailBody.concat('<li>' + session.Title__c + ' - ' + moment(session.Start__c).format('ddd, MMM D h:mm A') + '</li>');
+
                       if (selectedSessionRegistationSuccessCount === selectedSessions.length) {
+                        mailBody = mailBody.concat('</ul>');
+
                         this.isRegistrationSuccessful = true;
-                        // Update addendee active property here
-                        this._ds.updateAttendeeById({
-                          Id: attendeeId,
-                          Active__c: true
+                        this._ds.createMailer({
+                          Recipient_Name__c: attendee.Name,
+                          Recipient_Email__c: attendee.Email__c,
+                          Mail_Body__c: mailBody
                         }).then(
                           // tslint:disable-next-line:no-shadowed-variable
-                          (res) => {
-                            console.log('Attendee Updated.');
-                          }
+                          (res) => console.log(res)
                         ).catch(
-                          (err) => {
-                            console.log(err);
-                          }
+                          (err) => console.log(err)
                         );
                       }
                     }
@@ -135,19 +146,16 @@ export class EventRegisterComponent implements OnInit {
                 });
               } else {
                 this.isRegistrationSuccessful = true;
-                // Update addendee active property here
-                this._ds.updateAttendeeById({
-                  Id: attendeeId,
-                  Active__c: true
+
+                this._ds.createMailer({
+                  Recipient_Name__c: attendee.Name,
+                  Recipient_Email__c: attendee.Email__c,
+                  Mail_Body__c: mailBody
                 }).then(
                   // tslint:disable-next-line:no-shadowed-variable
-                  (res) => {
-                    console.log('Attendee Updated.');
-                  }
+                  (res) => console.log(res)
                 ).catch(
-                  (err) => {
-                    console.log(err);
-                  }
+                  (err) => console.log(err)
                 );
               }
             }
