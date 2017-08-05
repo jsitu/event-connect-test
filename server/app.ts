@@ -6,6 +6,7 @@ import * as config from './config';
 
 import { getEventsRouter } from './routes/events';
 import { getUsersRouter } from './routes/users';
+import { getMailersRouter } from './routes/mailers';
 
 /* These need to be during production deployment */
 import * as https from 'https';
@@ -44,6 +45,7 @@ org.authenticate(config.sfCred, function(err, resp) {
 // api routes
 app.use('/api/events', getEventsRouter(org));
 app.use('/api/users', getUsersRouter(org));
+app.use('/api/mailers', getMailersRouter(org));
 
 // this path location strategy is to let Angular handle all the routing
 app.get('/*', function(req, res) {
