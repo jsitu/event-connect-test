@@ -243,6 +243,11 @@ md-card.event-detail-card section.event-content aside div.event-location p span 
     margin-right: 5px;
 }
 
+md-card.event-detail-card section.event-content aside div.event-location p a {
+    text-decoration: none;
+    color: #01ab45;
+}
+
 md-card.event-detail-card section.event-location-map {
     display: block;
     width: 100%;

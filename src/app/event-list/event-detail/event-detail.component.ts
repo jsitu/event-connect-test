@@ -21,6 +21,7 @@ export class EventDetailComponent implements OnInit {
 
   lat: number;
   lng: number;
+  geoLink: string;
 
   constructor(
     private _ds: DataService,
@@ -88,6 +89,7 @@ export class EventDetailComponent implements OnInit {
           if (response.status === 'OK') {
               this.lat = response.results[0].geometry.location.lat;
               this.lng = response.results[0].geometry.location.lng;
+              this.geoLink = `http://maps.apple.com/?q=${this.lat},${this.lng}`;
               this.isMapActive = true;
           } else if (response.status === 'ZERO_RESULTS') {
               console.log('geocodingAPIService', 'ZERO_RESULTS', response.status);
