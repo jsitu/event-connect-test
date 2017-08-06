@@ -7,6 +7,7 @@ import { MaterialModule, MdTooltipModule, MdDialogModule } from '@angular/materi
 import { AppRouteModule } from './app.route';
 import { AgmCoreModule } from '@agm/core';
 import { TextMaskModule } from 'angular2-text-mask';
+import { ShareModule } from 'ng2share/share.module';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -49,7 +50,8 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     TextMaskModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAWCZ6J10f19dknhZksZPLYGzoGT1pwSbU'
-    })
+    }),
+    ShareModule
   ],
   entryComponents: [EventRegisterComponent],
   providers: [

@@ -198,6 +198,10 @@ md-card.event-detail-card section.event-content section.event-description div.ev
     font-weight: bold;
 }
 
+md-card.event-detail-card section.event-content section.event-description div.share-content {
+    margin-top: 2em;
+}
+
 md-card.event-detail-card section.event-content aside {
     display: flex;
     flex-direction: column;

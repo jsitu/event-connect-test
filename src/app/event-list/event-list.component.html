@@ -21,10 +21,10 @@
       <p class="event-address">{{event.address__c}}, {{event.city__c}}  {{event.state__c}}</p>
     </md-card-content>
     <md-card-actions>
-      <span *ngIf="eventService.isEventOpen(event)">{{event.remaining_seats__c}} spots left / {{event.registration_limit__c}} total</span>
-      <div class="tooltip-host" mdTooltip="Share" mdTooltipPosition="above">
-        <a><i class="material-icons">share</i></a>
-      </div>
+      <span *ngIf="eventService.isEventOpen(event); else eventUnavailable">{{event.remaining_seats__c}} spots left / {{event.registration_limit__c}} total</span>
+      <ng-template #eventUnavailable>
+        <span>Unavailable</span>
+      </ng-template>
     </md-card-actions>
   </md-card>
 </section>
