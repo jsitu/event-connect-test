@@ -10,6 +10,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { EventDetailComponent } from './event-list/event-detail/event-detail.component';
 import { EventRegisterComponent } from './event-list/event-detail/event-register/event-register.component';
@@ -28,6 +29,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 @NgModule({
   declarations: [
     AppComponent,
+    PageNotFoundComponent,
     EventListComponent,
     EventDetailComponent,
     EventRegisterComponent,
