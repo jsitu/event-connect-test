@@ -31,11 +31,19 @@ div.dialog-title a.back-button {
     right: auto;
 }
 
+div.dialog-title + p.required-field-indicator {
+    font-size: .8em;
+    font-weight: 600;
+    text-align: right;
+    margin-bottom: 0;
+}
+
 div.dialog-content {
-    flex-direction: column;
     min-width: 50vw;
     min-height: 50vh;
-    max-width: 60vw;
+    max-width: 50vw;
+    text-align: center;
+    flex-direction: column;
     /* this line is to fix the angular material input display issue in iOS  */
     -webkit-overflow-scrolling: auto;
 }
@@ -62,6 +70,10 @@ div.session-container.selected {
 div.session-container div.session-title {
     display: flex;
     flex-direction: column;
+}
+
+div.session-container div.session-title span {
+    text-align: left;
 }
 
 div.session-container div.session-title span:first-child {
@@ -117,11 +129,15 @@ div.dialog-content md-input-container {
 }
 
 div.validation-errors {
-  margin-top: -1.2em;
+    width: 85%;
+    margin-top: -1.2em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
 }
 
 div.validation-errors md-error {
-    width: 85%;
+    width: auto;
     font-size: .8em;
     margin: 0 auto;
 }
