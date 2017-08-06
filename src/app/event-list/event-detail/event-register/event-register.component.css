@@ -32,10 +32,10 @@ div.dialog-title a.back-button {
 }
 
 div.dialog-content {
-    display: flex;
     flex-direction: column;
     min-width: 50vw;
     min-height: 50vh;
+    max-width: 60vw;
     /* this line is to fix the angular material input display issue in iOS  */
     -webkit-overflow-scrolling: auto;
 }
@@ -215,6 +215,11 @@ div.registration-submit-loading div button.refresh-button {
 
     div.session-container {
         font-size: .9em;
+    }
+
+    div.dialog-content {
+        display: flex;
+        max-width: 100%;
     }
 
     div.dialog-content.mat-dialog-content {
