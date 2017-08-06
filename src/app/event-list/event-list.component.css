@@ -31,9 +31,8 @@ md-card.event-card {
     flex-direction: column;
     flex: 1;
     max-width: 24%;
-    overflow: hidden;
     margin: .5em;
-    padding: 15px;
+    padding: 0;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif !important;
     cursor: pointer;
@@ -44,11 +43,23 @@ md-card.event-card.hidden {
     display: none;
 }
 
+md-card.event-card div.event-image-cover {
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    text-align: center;
+}
+
 md-card.event-card img {
-    object-fit: contain;
-    margin-bottom: .5em;
-    min-height: 230px;
-    max-height: 230px;
+    margin: 0 auto;
+    object-fit: fill;
+    max-height: 200px;
+}
+
+md-card.event-card md-card-content {
+    padding: 1em;
+    margin: 0;
 }
 
 md-card.event-card p {
@@ -71,6 +82,8 @@ md-card.event-card p.event-status {
     font-weight: bold;
     margin-top: 0;
     text-align: right;
+    width: auto;
+    min-width: 5em;
 }
 
 md-card.event-card p.event-status.isDraft {
@@ -101,7 +114,8 @@ md-card.event-card p.event-address {
 }
 
 md-card-actions {
-    margin: 0;
+    margin: 0 !important;
+    padding: 0 1em 0.5em 1em;
 }
 
 md-card-actions span {
