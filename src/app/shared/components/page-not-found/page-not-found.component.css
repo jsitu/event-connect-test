@@ -26,3 +26,18 @@ div.container button {
     min-width: 15em;
     outline: none;
 }
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 1023px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+    div.container h4 {
+        font-size: 1.8em;
+    }
+
+    div.container img {
+        max-width: 280px;
+    }
+
+}
