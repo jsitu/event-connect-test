@@ -64,9 +64,9 @@
               <li>{{session.Start__c | DateTime: 'time'}} - {{session.End__c | DateTime: 'time'}}</li>
               <li class="session-item-title">{{session.Title__c}}</li>
               <li>
-                <span *ngIf="eventService.isEventSessionOpen(session); else eventUnavailable">{{session.Remaining_Seats__c}} available / {{session.Registration_Limit__c}} total seats</span>
+                <span *ngIf="eventService.isEventSessionOpen(session); else eventUnavailable">{{session.Remaining_Seats__c}} available / {{session.Registration_Limit__c}} total</span>
                 <ng-template #eventUnavailable>
-                  <span>0 available / {{session.Registration_Limit__c}} seats</span>
+                  <span>0 available / {{session.Registration_Limit__c}} total</span>
                 </ng-template>
               </li>
               <li [ngClass]="{
