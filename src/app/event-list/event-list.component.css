@@ -30,7 +30,8 @@ md-card.event-card {
     display: flex;
     flex-direction: column;
     flex: 1;
-    max-width: 24%;
+    width: 24%;
+    max-width: 270px;
     margin: .5em;
     padding: 0;
     box-sizing: border-box;
@@ -46,15 +47,14 @@ md-card.event-card.hidden {
 md-card.event-card div.event-image-cover {
     overflow: hidden;
     width: 100%;
-    height: auto;
-    max-height: 200px;
+    height: 180px;
     text-align: center;
 }
 
 md-card.event-card img {
     margin: 0 auto;
-    object-fit: fill;
-    max-height: 200px;
+    object-fit: cover;
+    width: 100%;
 }
 
 md-card.event-card md-card-content {
@@ -155,9 +155,11 @@ md-card-actions div.tooltip-host a i {
   and (-webkit-min-device-pixel-ratio: 2) {
     section#event-list-container {
         flex-direction: column;
+        align-items: center;
     }
 
     md-card.event-card {
-        max-width: 100%;
+        width: 100%;
+        max-width: 90%;
     }
 }
