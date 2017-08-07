@@ -89,7 +89,8 @@ export class EventRegisterComponent implements OnInit {
     };
 
     const EventStartDate = moment(this.eventStartDate).format('ddd, MMM D h:mm A');
-    let mailBody = '<p><strong>' + this.eventTitle + '</strong> - ' + EventStartDate + '</p>';
+    // tslint:disable-next-line:max-line-length
+    let mailBody = '<br /><h4 style="text-decoration: underline;">Event Details<h4><p><strong>' + this.eventTitle + '</strong></p><p style="font-size: 0.95em">' + EventStartDate + '</p>';
 
     this._ds.checkAttendeeUniqueness(attendee).then(
       (res) => {
@@ -108,7 +109,8 @@ export class EventRegisterComponent implements OnInit {
 
               let selectedSessionRegistationSuccessCount = 0;
               if (selectedSessions.length > 0) {
-                mailBody = mailBody.concat('<ul>');
+                // tslint:disable-next-line:max-line-length
+                mailBody = mailBody.concat('<br /><div style="margin-top: 25px;"><h4 style="text-decoration: underline;">Session Details</h4>');
                 selectedSessions = _.sortBy(selectedSessions, ['Start__c']);
                 selectedSessions.forEach(session => {
                   this._ds.createSessionAttendeeAssociation({
@@ -121,10 +123,10 @@ export class EventRegisterComponent implements OnInit {
                       selectedSessionRegistationSuccessCount++;
 
                       // tslint:disable-next-line:max-line-length
-                      mailBody = mailBody.concat('<li>' + session.Title__c + ' - ' + moment(session.Start__c).format('ddd, MMM D h:mm A') + '</li>');
+                      mailBody = mailBody.concat('<p style="margin-top: 10px;"><strong>' + session.Title__c + '</strong></p><p style="font-size: 0.95em">' + moment(session.Start__c).format('ddd, MMM D h:mm A') + '</p>');
 
                       if (selectedSessionRegistationSuccessCount === selectedSessions.length) {
-                        mailBody = mailBody.concat('</ul>');
+                        mailBody = mailBody.concat('</div>');
 
                         this.isRegistrationSuccessful = true;
                         this._ds.createMailer({
@@ -186,7 +188,8 @@ export class EventRegisterComponent implements OnInit {
 
                     let selectedSessionRegistationSuccessCount = 0;
                     if (selectedSessions.length > 0) {
-                      mailBody = mailBody.concat('<ul>');
+                      // tslint:disable-next-line:max-line-length
+                      mailBody = mailBody.concat('<br /><div style="margin-top: 25px;"><h4 style="text-decoration: underline;">Session Details</h4>');
                       selectedSessions = _.sortBy(selectedSessions, ['Start__c']);
                       selectedSessions.forEach(session => {
                         this._ds.createSessionAttendeeAssociation({
@@ -199,10 +202,10 @@ export class EventRegisterComponent implements OnInit {
                             selectedSessionRegistationSuccessCount++;
 
                             // tslint:disable-next-line:max-line-length
-                            mailBody = mailBody.concat('<li>' + session.Title__c + ' - ' + moment(session.Start__c).format('ddd, MMM D h:mm A') + '</li>');
+                            mailBody = mailBody.concat('<p style="margin-top: 10px;"><strong>' + session.Title__c + '</strong></p><p style="font-size: 0.95em">' + moment(session.Start__c).format('ddd, MMM D h:mm A') + '</p>');
 
                             if (selectedSessionRegistationSuccessCount === selectedSessions.length) {
-                              mailBody = mailBody.concat('</ul>');
+                              mailBody = mailBody.concat('</div>');
 
                               this.isRegistrationSuccessful = true;
                               this._ds.createMailer({
