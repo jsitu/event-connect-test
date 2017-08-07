@@ -74,6 +74,7 @@ div.session-container div.session-title {
 
 div.session-container div.session-title span {
     text-align: left;
+    float: left;
 }
 
 div.session-container div.session-title span:first-child {

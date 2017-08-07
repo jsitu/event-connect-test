@@ -32,7 +32,7 @@
             <h4>Description</h4>
             <div [innerHTML]="eventService.selectedEvent?.description__c"></div>
           </div>
-          <div class="event-session-content" *ngIf="eventService.selectedEvent?.sessions__r && eventService.selectedEvent?.remaining_seats__c > 0">
+          <div class="event-session-content" *ngIf="eventService.selectedEvent?.sessions__r">
             <h4>Sessions</h4>
             <table>
               <tr>
