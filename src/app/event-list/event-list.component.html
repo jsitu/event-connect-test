@@ -14,7 +14,7 @@
             'isSoldOut': eventService.isEventSoldOut(event),
             'isClosed': eventService.isEventClosed(event)
           }">
-          {{event.status__c}}
+          {{event.status__c | uppercase}}
         </p>
       </div>
       <p class="event-title">{{event.title__c | uppercase}}</p>

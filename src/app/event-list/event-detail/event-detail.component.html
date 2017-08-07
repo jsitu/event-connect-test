@@ -15,7 +15,7 @@
               'isSoldOut': eventService.isEventSoldOut(eventService.selectedEvent),
               'isClosed': eventService.isEventClosed(eventService.selectedEvent)
             }">
-            {{eventService.selectedEvent?.status__c}}
+            {{eventService.selectedEvent?.status__c | uppercase}}
           </p>
           <p class="event-title">{{eventService.selectedEvent?.title__c | uppercase}}</p>
           <p class="event-remaining-seats" *ngIf="eventService.selectedEvent?.status__c == 'Open'">{{eventService.selectedEvent?.remaining_seats__c}} spots left / {{eventService.selectedEvent?.registration_limit__c}} total seats</p>
