@@ -144,61 +144,68 @@ md-card.event-detail-card section.event-content section.event-description div.ev
     margin-top: 3.5em;
 }
 
-md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items-small-screen {
-    display: none;
+md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items {
+    display: block;
+    margin: 0;
+    margin-bottom: 1.5em;
+    padding: 0;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #ccc;
 }
 
-md-card.event-detail-card section.event-content section.event-description div.event-session-content table {
-    font-size: .95em;
+md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items li {
+    display: flex;
+    margin-bottom: .5em;
 }
 
-md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr th {
-    text-align: left;
-    padding-right: 1em;
-    font-size: .95em;
+md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
 }
 
-md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td {
-    padding-right: 1em;
+md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items li.session-item-title {
+    font-size: 1.1em;
+    font-weight: bold;
 }
 
-md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td.isDraft {
+md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items li.isDraft {
     color: #FBC02D;
-    text-align: center;
-    padding: 0;
-    width: 6em;
     font-size: .9em;
     font-weight: bold;
 }
 
-md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td.isOpen {
+md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items li.isOpen {
     color: #4caf50;
-    text-align: center;
-    padding: 0;
-    width: 6em;
     font-size: .9em;
     font-weight: bold;
 }
 
-md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td.isSoldOut {
+md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items li.isSoldOut {
     color: #F44336;
-    text-align: center;
-    padding: 0;
-    width: 6em;
     font-size: .9em;
     font-weight: bold;
 }
 
-md-card.event-detail-card section.event-content section.event-description div.event-session-content table tr td.isClosed {
+md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items li.isClosed {
     color: #9E9E9E;
-    text-align: center;
-    padding: 0;
-    width: 6em;
     font-size: .9em;
     font-weight: bold;
+}
+
+md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items li span.icons {
+    display: inline-flex;
+    min-width: 40px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items li span.icons i {
+    font-size: 1.2em;
+    color: #616161;
 }
 
 md-card.event-detail-card section.event-content section.event-description div.share-content {
+    display: none;
     margin-top: 2em;
 }
 
@@ -250,6 +257,11 @@ md-card.event-detail-card section.event-content aside div.event-location p span 
 md-card.event-detail-card section.event-content aside div.event-location p a {
     text-decoration: none;
     color: #01ab45;
+}
+
+md-card.event-detail-card section.event-content aside div.share-content {
+    margin-top: 3em;
+    margin-left: -5px;
 }
 
 md-card.event-detail-card section.event-location-map {
@@ -341,9 +353,8 @@ button.event-register-button-fixed {
         flex-direction: column;
     }
 
-    md-card.event-detail-card section.event-content section.event-description {
-        padding: 1em;
-        margin-top: 1em;
+    md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items li {
+        font-size: .95em;
     }
 
     md-card.event-detail-card section.event-content aside {
@@ -356,60 +367,22 @@ button.event-register-button-fixed {
         margin-top: 1em;
     }
 
+    md-card.event-detail-card section.event-content aside div.share-content {
+        display: none;
+    }
+
+    md-card.event-detail-card section.event-content section.event-description {
+        padding: 1em;
+        margin-top: 1em;
+    }
+
     md-card.event-detail-card section.event-content section.event-description div.event-session-content {
         margin-top: 3em;
     }
 
-    md-card.event-detail-card section.event-content section.event-description div.event-session-content table {
-        display: none;
-    }
-
-    md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items-small-screen {
+    md-card.event-detail-card section.event-content section.event-description div.share-content {
         display: block;
-        margin: 0;
-        margin-bottom: 1.5em;
-        padding: 0;
-        padding-bottom: 1em;
-        border-bottom: 1px solid #ccc;
-    }
-
-    md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items-small-screen:last-child {
-        margin-bottom: 0;
-        border-bottom: none;
-    }
-
-    md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items-small-screen li {
-        display: block;
-        margin-bottom: .2em;
-    }
-
-    md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items-small-screen li.session-item-title {
-        font-size: 1.1em;
-        font-weight: bold;
-    }
-
-    md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items-small-screen li.isDraft {
-        color: #FBC02D;
-        font-size: .9em;
-        font-weight: bold;
-    }
-
-    md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items-small-screen li.isOpen {
-        color: #4caf50;
-        font-size: .9em;
-        font-weight: bold;
-    }
-
-    md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items-small-screen li.isSoldOut {
-        color: #F44336;
-        font-size: .9em;
-        font-weight: bold;
-    }
-
-    md-card.event-detail-card section.event-content section.event-description div.event-session-content ul.session-items-small-screen li.isClosed {
-        color: #9E9E9E;
-        font-size: .9em;
-        font-weight: bold;
+        margin-top: 2em;
     }
     
     button.event-register-button-fixed {

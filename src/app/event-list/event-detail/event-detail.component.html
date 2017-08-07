@@ -34,36 +34,11 @@
           </div>
           <div class="event-session-content" *ngIf="eventService.selectedEvent?.sessions__r">
             <h4>Sessions</h4>
-            <table>
-              <tr>
-                <th>Time</th>
-                <th>Title</th>
-                <th>Availability<th>
-                <th></th>
-              </tr>
-              <tr *ngFor="let session of eventService.selectedEvent?.sessions__r?.records | orderBy: 'Start__c'">
-                <td>{{session.Start__c | DateTime: 'time'}} - {{session.End__c | DateTime: 'time'}}</td>
-                <td>{{session.Title__c}}</td>
-                <td>
-                  <span *ngIf="eventService.isEventSessionOpen(session); else eventUnavailable">{{session.Remaining_Seats__c}} / {{session.Registration_Limit__c}}</span>
-                  <ng-template #eventUnavailable>
-                    <span>0 / {{session.Registration_Limit__c}}</span>
-                  </ng-template>
-                </td>
-                <td [ngClass]="{
-                  'isDraft': eventService.isEventSessionDraft(session),
-                  'isOpen': eventService.isEventSessionOpen(session),
-                  'isSoldOut': eventService.isEventSessionSoldOut(session),
-                  'isClosed': eventService.isEventSessionClosed(session)
-                }">
-                  <span>{{session.Status__c}}</span>
-                </td>
-              </tr>
-            </table>
-            <ul *ngFor="let session of eventService.selectedEvent?.sessions__r?.records | orderBy: 'Start__c'" class="session-items-small-screen">
-              <li>{{session.Start__c | DateTime: 'time'}} - {{session.End__c | DateTime: 'time'}}</li>
-              <li class="session-item-title">{{session.Title__c}}</li>
+            <ul *ngFor="let session of eventService.selectedEvent?.sessions__r?.records | orderBy: 'Start__c'" class="session-items">
+              <li><span class="icons"><i class="material-icons">event</i></span>{{session.Start__c | DateTime: 'date-short'}} - {{session.End__c | DateTime: 'date-short'}}</li>
+              <li class="session-item-title"><span class="icons"><i class="material-icons">description</i></span>{{session.Title__c}}</li>
               <li>
+                <span class="icons"><i class="material-icons">event_seat</i></span>
                 <span *ngIf="eventService.isEventSessionOpen(session); else eventUnavailable">{{session.Remaining_Seats__c}} available / {{session.Registration_Limit__c}} total</span>
                 <ng-template #eventUnavailable>
                   <span>0 available / {{session.Registration_Limit__c}} total</span>
@@ -75,7 +50,8 @@
                 'isSoldOut': eventService.isEventSessionSoldOut(session),
                 'isClosed': eventService.isEventSessionClosed(session)
               }">
-                <span>{{session.Status__c}}</span>
+                <span class="icons"><i class="material-icons">hourglass_full</i></span>
+                <span>{{session.Status__c | uppercase}}</span>
               </li>
             </ul>
           </div>
@@ -106,6 +82,13 @@
               <span>{{eventService.selectedEvent?.zip__c}}</span>
             </p>
             <p><a [href]="geoLink" target="_blank">View Map</a></p>
+          </div>
+          <div class="share-content">
+            <share-container
+              direction="horizontal"
+              [expandable]="false"
+              [platforms]="['facebook', 'twitter', 'mail']">
+            </share-container>
           </div>
         </aside>
       </section>
